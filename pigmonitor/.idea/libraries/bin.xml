@@ -3,7 +3,7 @@
     <CLASSES />
     <JAVADOC />
     <NATIVE>
-      <root url="file://$USER_HOME$/Downloads/javafx-sdk-24.0.1/bin" />
+      <root url="file://$PROJECT_DIR$/dependencies/javafx-sdk-24.0.1/bin" />
     </NATIVE>
     <SOURCES />
   </library>

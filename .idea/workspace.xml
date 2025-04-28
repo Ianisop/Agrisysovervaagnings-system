@@ -4,121 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84ba5a3c-dc35-485f-bcb8-70c3eab07b34" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/pigmonitor/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/.idea/libraries/bin.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-console-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-console-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-datetime-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-debug-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-errorhandling-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-file-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-file-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-file-l2-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-handle-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-heap-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-interlocked-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-libraryloader-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-localization-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-memory-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-namedpipe-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-processenvironment-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-processthreads-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-processthreads-l1-1-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-profile-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-rtlsupport-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-string-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-synch-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-synch-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-sysinfo-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-timezone-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-core-util-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-conio-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-convert-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-environment-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-filesystem-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-heap-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-locale-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-math-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-multibyte-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-private-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-process-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-runtime-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-stdio-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-string-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-time-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/api-ms-win-crt-utility-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/decora_sse.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/fxplugins.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/glass.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/glib-lite.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/gstreamer-lite.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/javafx_font.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/javafx_iio.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/jfxmedia.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/jfxwebkit.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/msvcp140.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/msvcp140_1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/msvcp140_2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/prism_common.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/prism_d3d.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/prism_sw.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/ucrtbase.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/vcruntime140.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/bin/vcruntime140_1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.base/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.base/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.base/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.controls/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.controls/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.controls/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.fxml/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.fxml/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.fxml/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.graphics/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.graphics/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.graphics/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.graphics/jpeg_fx.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.graphics/mesa3d.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.graphics/pipewire.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.media/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.media/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.media/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.media/directshow.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.media/glib.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.media/gstreamer.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.media/libffi.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.swing/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.swing/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.swing/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.web/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.web/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.web/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.web/icu_web.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.web/libxml2.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.web/libxslt.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/javafx.web/webkit.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/jdk.jsobject/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/jdk.jsobject/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/jdk.jsobject/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/jfx.incubator.input/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/jfx.incubator.input/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/jfx.incubator.input/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/jfx.incubator.richtext/ADDITIONAL_LICENSE_INFO" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/jfx.incubator.richtext/ASSEMBLY_EXCEPTION" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/jfx.incubator.richtext/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/legal/jfx.incubator.richtext/unicode-fx.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/dependencies/javafx-sdk-24.0.1/lib/javafx.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/src/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/src/main/java/JavaFX.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/src/main/java/PigMonitor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pigmonitor/src/main/java/PigMonitorController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
+    <list default="true" id="74d7d523-6634-4feb-b5f6-d85e465b785c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/javafx_swt.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/pig.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,33 +23,75 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Laverenz"
+  }
 }]]></component>
-  <component name="ProjectId" id="2wLsvsek870imKbyAjFnh2bakNI" />
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Ianisop/pig.git",
+    "accountId": "1f279578-23c4-41d4-9acf-66a79378e959"
+  }
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2wM2u6ksD5NYC8SJrlHKUIGmu4i" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.App.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/bocia/Documents/GitHub/pig"
+    "last_opened_file_path": "C:/Users/nokke/Desktop/openjfx/javafx-sdk-24.0.1/lib/jfx.incubator.richtext.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="App" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="dk.App" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\nokke\Desktop\openjfx\javafx-sdk-24.0.1\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="84ba5a3c-dc35-485f-bcb8-70c3eab07b34" name="Changes" comment="" />
-      <created>1745832421388</created>
+      <changelist id="74d7d523-6634-4feb-b5f6-d85e465b785c" name="Changes" comment="" />
+      <created>1745837341443</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1745832421388</updated>
+      <updated>1745837341443</updated>
+      <workItem from="1745837342466" duration="439000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

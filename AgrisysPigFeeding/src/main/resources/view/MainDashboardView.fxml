@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.agrisys.pigfeedingsystem.controller.MainDashboardController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #e0e0e0; -fx-padding: 10;">
+            <Label fx:id="welcomeLabel" text="Velkommen">
+                <font><Font name="System Bold" size="16.0" /></font>
+            </Label>
+            <Pane HBox.hgrow="ALWAYS" /> <!-- Spacer -->
+            <Label fx:id="warningLabel" text="Status: Tjekker..." alignment="CENTER_RIGHT"/>
+            <Button text="Log ud" onAction="#handleLogoutAction" />
+            <padding><Insets bottom="5.0" left="10.0" right="10.0" top="5.0" /></padding>
+        </HBox>
+    </top>
+    <left>
+        <VBox spacing="10.0" prefWidth="200.0" style="-fx-border-color: lightgray; -fx-border-width: 0 1 0 0;">
+            <padding><Insets top="10" right="10" bottom="10" left="10" /></padding>
+            <Label text="Grise Oversigt:">
+                <font><Font name="System Bold" size="14.0" /></font>
+            </Label>
+            <ListView fx:id="pigListView" />
+            <Button text="Importér Excel" onAction="#handleImportExcelAction" maxWidth="Infinity"/>
+            <Button text="Eksportér CSV" onAction="#handleExportCsvAction" maxWidth="Infinity"/>
+            <Button text="Vis Advarsler" onAction="#handleShowWarningsAction" maxWidth="Infinity"/>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="5.0" BorderPane.alignment="CENTER">
+            <padding><Insets top="10" right="10" bottom="10" left="10" /></padding>
+            <Label text="Fodringsdata for valgt gris:">
+                <font><Font name="System Bold" size="14.0" /></font>
+            </Label>
+            <TableView fx:id="feedingTableView" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="timestampColumn" prefWidth="200.0" text="Tidspunkt" />
+                    <TableColumn fx:id="amountColumn" prefWidth="100.0" text="Mængde (kg)" />
+                </columns>
+                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml">
+    <top>
+        <HBox spacing="20" padding="10">
+            <Label text="Farm Overview" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="20" padding="20">
+            <GridPane hgap="20" vgap="20">
+                <Label text="Total Pigs: 1740" style="-fx-font-size: 16px;"/>
+                <Label text="Ready for Shipment: 472" style="-fx-font-size: 16px;"/>
+                <Label text="Overweight: 236" style="-fx-font-size: 16px;"/>
+                <Label text="Underperforming: 58" style="-fx-font-size: 16px;"/>
+            </GridPane>
+
+            <LineChart title="Water Usage (Last 48 Hours)" >
+                <xAxis>
+                    <CategoryAxis label="Time"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis label="Liters"/>
+                </yAxis>
+            </LineChart>
+
+            <HBox spacing="20">
+                <VBox spacing="10">
+                    <Label text="Feeding Status" style="-fx-font-size: 18px;"/>
+                    <Label text="Remaining Today: 156.2 kg"/>
+                    <Label text="Remaining Yesterday: 222.5 kg"/>
+                </VBox>
+
+                <BarChart title="Total Feed - Last 7 Days">
+                    <xAxis>
+                        <CategoryAxis label="Date"/>
+                    </xAxis>
+                    <yAxis>
+                        <NumberAxis label="Feed (kg)"/>
+                    </yAxis>
+                </BarChart>
+            </HBox>
+
+            <VBox spacing="10">
+                <Label text="Auto Reports" style="-fx-font-size: 18px;"/>
+                <Button text="Farrowing Unit Fat Very Fat"/>
+                <Button text="Insemination Skinny"/>
+            </VBox>
+        </VBox>
+    </center>
+
+    <left>
+        <VBox spacing="10" padding="10">
+            <Button text="Dashboard"/>
+            <Button text="KPI"/>
+            <Button text="Feed Curves"/>
+            <Button text="Silos"/>
+            <Button text="Animals"/>
+            <Button text="Reports"/>
+            <Button text="Logbook"/>
+            <Button text="Settings"/>
+        </VBox>
+    </left>
+</BorderPane>

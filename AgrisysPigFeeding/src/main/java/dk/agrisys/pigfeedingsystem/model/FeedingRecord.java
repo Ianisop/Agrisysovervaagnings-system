@@ -1,8 +1,9 @@
 package dk.agrisys.pigfeedingsystem.model;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.temporal.TemporalAccessor;
 
-// (Hvem har skrevet: [Dit Navn/Gruppens Navn])
 public class FeedingRecord {
     private int id;
     private int pigId;
@@ -21,5 +22,20 @@ public class FeedingRecord {
     public LocalDateTime getTimestamp() { return timestamp; }
     public double getAmountKg() { return amountKg; }
 
-    // Getters...
+    public TemporalAccessor getDate() {
+        return timestamp.toLocalDate(); // Extracts and returns the date part
+    }
+
+    public void setPigId(Integer pigId) {
+
+    }
+
+    public void setDate(LocalDate date) {
+    }
+
+    public void setAmountKg(Double amount) {
+    }
+
+    public void setId(int i) {
+    }
 }

@@ -9,5 +9,8 @@
         <module name="pigfeedingsystem" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="pigmonitor" target="22" />
+    </bytecodeTargetLevel>
   </component>
 </project>

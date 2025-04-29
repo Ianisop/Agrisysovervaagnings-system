@@ -52,6 +52,7 @@ public class ExcelImportService {
             boolean skipHeader = true;
             for (Row row : sheet) {
                 rowNum++;
+                System.out.println("Service: Excel Import - Processing row " + rowNum);
                 if (skipHeader) {
                     skipHeader = false;
                     continue;
@@ -63,19 +64,19 @@ public class ExcelImportService {
                 }
 
                 try {
-                    Integer pigId = readIntegerCell(row.getCell(0), rowNum, 0);
+                    Integer PigID = readIntegerCell(row.getCell(0), rowNum, 0);
                     LocalDate date = readDateCell(row.getCell(1), rowNum, 1);
                     Double amount = readDoubleCell(row.getCell(2), rowNum, 2);
 
-                    if (pigId == null || date == null || amount == null) {
+                    if (PigID == null || date == null || amount == null) {
                         System.err.printf("Service: Excel Import - Invalid data in row %d. PigID: %s, Date: %s, Amount: %s. Row skipped.%n",
-                                rowNum, pigId, date, amount);
+                                rowNum, PigID, date, amount);
                         importHasErrors = true;
                         continue;
                     }
 
-                    FeedingRecord record = new FeedingRecord(   0, pigId, LocalDateTime.of(date, LocalDateTime.now().toLocalTime()), amount);
-                    record.setPigId(pigId);
+                    FeedingRecord record = new FeedingRecord(   0, PigID, LocalDateTime.of(date, LocalDateTime.now().toLocalTime()), amount);
+                    record.setPigId(PigID);
                     record.setDate(date);
                     record.setAmountKg(amount);
 
@@ -173,8 +174,11 @@ public class ExcelImportService {
                     LocalDateTime dateTime = cell.getLocalDateTimeCellValue();
                     return dateTime.toLocalDate();
                 } else {
-                    System.err.printf("Warning R%d C%d: Numeric cell not formatted as date.%n", rowNum, colNum + 1);
-                    return null;
+                    // Handle numeric cells as potential Excel serial dates
+                    double numericValue = cell.getNumericCellValue();
+                    LocalDate excelDate = LocalDate.of(1900, 1, 1).plusDays((long) numericValue - 2); // Adjust for Excel's date system
+                    System.err.printf("Warning R%d C%d: Numeric cell treated as Excel serial date.%n", rowNum, colNum + 1);
+                    return excelDate;
                 }
             } else if (cell.getCellType() == CellType.STRING) {
                 String dateString = cell.getStringCellValue().trim();

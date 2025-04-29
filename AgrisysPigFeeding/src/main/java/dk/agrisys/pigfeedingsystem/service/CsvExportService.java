@@ -52,7 +52,7 @@ public class CsvExportService {
                 writer.printf(Locale.US, "%d;%d;%s;%.2f%n", // Locale.US for '.' decimal
                         record.getId(),
                         record.getPigId(),
-                        // Choose the correct getter (getDate or getTimestamp) and formatter
+                        // Choose the correct getter (getDate or getDate) and formatter
                         (record.getDate() != null ? DATE_FORMATTER.format(record.getDate()) : ""), // Handle null date
                         // If using LocalDateTime:
                         // (record.getTimestamp() != null ? DATE_TIME_FORMATTER.format(record.getTimestamp()) : ""),

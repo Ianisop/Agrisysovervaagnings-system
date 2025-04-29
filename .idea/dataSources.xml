@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Agrisys" uuid="7000d11b-2b6a-4213-a7a9-e1d3f8d5e974">
+    <data-source source="LOCAL" name="Agrisys" uuid="efd45cca-2a31-49f0-893f-4e1958bd1d29">
       <driver-ref>sqlserver.ms</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>

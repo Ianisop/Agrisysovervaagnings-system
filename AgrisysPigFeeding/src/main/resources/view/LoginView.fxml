@@ -8,26 +8,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="10.0" prefHeight="300.0" prefWidth="400.0"
-      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="dk.agrisys.pigfeedingsystem.controller.LoginController">
+<VBox id="background" alignment="CENTER" prefHeight="300.0" prefWidth="400.0" spacing="10.0" style="-fx-background-color: #5B8966;" styleClass="background" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.agrisys.pigfeedingsystem.controller.LoginController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <Label text="Login til Fodringssystem">
-        <font>
-            <Font name="System Bold" size="18.0"/>
-        </font>
-    </Label>
+    <Label id="loginTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="64.0" prefWidth="237.0" text="FODRINGSSYSTEM">
+      <font>
+         <Font name="Franklin Gothic Heavy" size="26.0" />
+      </font></Label>
+    <TextField fx:id="usernameField" prefHeight="40.0" prefWidth="360.0" promptText="Indtast brugernavn" style="-fx-background-color: #00380E;">
+      <font>
+         <Font name="Franklin Gothic Heavy" size="12.0" />
+      </font></TextField>
+    <PasswordField fx:id="passwordField" prefHeight="40.0" prefWidth="360.0" promptText="Indtast password" style="-fx-background-color: #00380E;">
+      <font>
+         <Font name="Franklin Gothic Heavy" size="12.0" />
+      </font></PasswordField>
 
-    <Label text="Brugernavn:"/>
-    <TextField fx:id="usernameField" promptText="Indtast brugernavn"/>
+    <Button id="loginButton" defaultButton="true" onAction="#handleLoginButtonAction" prefHeight="31.0" prefWidth="89.0" style="-fx-background-color: #00380E;" text="Login" textFill="WHITE">
+      <font>
+         <Font name="Franklin Gothic Heavy" size="18.0" />
+      </font></Button>
 
-    <Label text="Password:"/>
-    <PasswordField fx:id="passwordField" promptText="Indtast password"/>
-
-    <Button text="Login" onAction="#handleLoginButtonAction" defaultButton="true"/>
-
-    <Label fx:id="errorLabel" textFill="RED"/>
+    <Label fx:id="errorLabel" textFill="RED" />
 </VBox>

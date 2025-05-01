@@ -7,11 +7,11 @@ import java.sql.SQLException;
 public class DatabaseConnector {
 
     private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=Agrisys;encrypt=true;trustServerCertificate=true;";
-    private static final String DB_USER = "Magnus";
-    private static final String DB_PASSWORD = "Jpc77rfc";
+    private static final String DB_USER = "admin";
+    private static final String DB_PASSWORD = "1234";
 
     public static Connection getConnection() throws SQLException {
-        System.out.println("Connecting to the database...");
+       // System.out.println("Connecting to the database...");
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
     }
 

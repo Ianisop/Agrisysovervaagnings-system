@@ -86,15 +86,15 @@ public class FeedingDataService {
      */
     public List<FeedingRecord> getFeedingsForPig(Pig pig) {
         // Check for null pig or invalid ID early
-        if (pig == null || pig.getId() <= 0) { // Assuming ID > 0 is valid
+        if (pig == null) { // Assuming ID > 0 is valid
             if (pig == null) System.err.println("Service: getFeedingsForPig called with null Pig object.");
-            else System.err.println("Service: getFeedingsForPig called with Pig object without valid ID: " + pig.getId());
+            else System.err.println("Service: getFeedingsForPig called with Pig object without valid ID: " + pig.getTagNumber());
             return Collections.emptyList(); // Use Collections.emptyList() for an immutable empty list
         }
         try {
-            return feedingRecordDAO.getFeedingsForPig(pig.getId());
+            return feedingRecordDAO.getFeedingsForPig(Integer.parseInt(pig.getTagNumber())); // FIX LATER
         } catch (Exception e) {
-            System.err.printf("Service: Error retrieving feedings for pig ID %d: %s%n", pig.getId(), e.getMessage());
+            System.err.printf("Service: Error retrieving feedings for pig ID %d: %s%n", pig.getTagNumber(), e.getMessage());
             e.printStackTrace();
             return Collections.emptyList(); // Return empty list on error
         }

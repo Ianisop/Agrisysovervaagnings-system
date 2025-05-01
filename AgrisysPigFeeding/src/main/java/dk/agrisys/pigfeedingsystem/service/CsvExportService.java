@@ -50,13 +50,10 @@ public class CsvExportService {
                 // Use Locale.US to ensure period as decimal separator
                 // Format the date using the formatter
                 writer.printf(Locale.US, "%d;%d;%s;%.2f%n", // Locale.US for '.' decimal
-                        record.getId(),
+                        record.getLocation(),
                         record.getPigId(),
-                        // Choose the correct getter (getDate or getDate) and formatter
-                        (record.getDate() != null ? DATE_FORMATTER.format(record.getDate()) : ""), // Handle null date
-                        // If using LocalDateTime:
-                        // (record.getTimestamp() != null ? DATE_TIME_FORMATTER.format(record.getTimestamp()) : ""),
-                        record.getAmountKg());
+                        (record.getTimestamp() != null ? record.getTimestamp() : ""), // Handle null date
+                        record.getAmountInGrams());
             }
 
             System.out.println("Service: CSV Export to '" + file.getAbsolutePath() + "' successful. Number of records: " + data.size());

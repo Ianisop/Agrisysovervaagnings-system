@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afb8d8ca-70e1-4d2e-8a80-4fc551af7672" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/DatabaseConnector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/FeedingRecordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/FeedingRecordDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/PigDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/PigDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/model/FeedingRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/model/FeedingRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/model/Pig.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/model/Pig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/CsvExportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/CsvExportService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/ExcelImportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/ExcelImportService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/FeedingDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/FeedingDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/WarningService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/WarningService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,38 +70,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.App.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.pigfeedingsystem [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.pigfeedingsystem [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.pigfeedingsystem [dependency:tree].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.pigfeedingsystem [javafx:run].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;TestAfCSV&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.App.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "Maven.pigfeedingsystem [clean,install].executor": "Run",
+    "Maven.pigfeedingsystem [clean].executor": "Run",
+    "Maven.pigfeedingsystem [dependency:tree].executor": "Run",
+    "Maven.pigfeedingsystem [javafx:run].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "TestAfCSV",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;sqlserver&quot;,
-      &quot;sqlserver.localdb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlserver",
+      "sqlserver.localdb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RebelAgentSelection">
     <selection>jr</selection>
   </component>
@@ -146,6 +138,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

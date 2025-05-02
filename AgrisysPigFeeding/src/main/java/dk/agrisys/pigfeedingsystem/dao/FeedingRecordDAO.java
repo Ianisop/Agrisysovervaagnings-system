@@ -82,24 +82,36 @@ public class FeedingRecordDAO {
     }
     public boolean batchInsertFeedingRecords(List<FeedingRecord> records) {
         String sql = "INSERT INTO Feeding (FeedingLocation, PigID, Date, Duration, FeedAmountGrams) VALUES (?, ?, ?, ?, ?)";
-        Set<Long> existingPigs = pigData.getAllPigIds(); // You need to implement this
-        //cache all pigs to save
+
+        // Fetch all existing PigIDs from DB
+        Set<Long> existingPigs = pigData.getAllPigIds();
+
+        // Filter pigs that don't already exist in DB
         List<Pig> pigsToSave = records.stream()
                 .map(r -> new Pig(String.valueOf(r.getPigId())))
+                .filter(p -> !existingPigs.contains(Long.parseLong(p.getTagNumber())))
                 .distinct()
                 .toList();
+
+        // Insert new pigs first
+        if (!pigsToSave.isEmpty()) {
+            try {
+                pigData.batchSavePigs(pigsToSave); // Must succeed before feeding insert
+            } catch (Exception e) {
+                System.err.println("PigDAO: Error in batch pig insert: " + e.getMessage());
+                return false;
+            }
+        }
+
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            conn.setAutoCommit(false); // Optional: improves performance and ensures atomicity
-
-            int batchSize = 10000; // Commit every 500 records to avoid memory issues
+            conn.setAutoCommit(false);
+            int batchSize = 10000;
             int count = 0;
 
-
             for (FeedingRecord record : records) {
-                pigData.batchSavePigs(pigsToSave);
                 ps.setInt(1, record.getLocation());
                 ps.setLong(2, record.getPigId());
                 ps.setTimestamp(3, Timestamp.valueOf(record.getTimestamp()));
@@ -108,15 +120,12 @@ public class FeedingRecordDAO {
                 ps.addBatch();
 
                 if (++count % batchSize == 0) {
-                    ps.executeBatch(); // Execute every 500 records
-                    System.out.println("Batch Commited!");
+                    ps.executeBatch();
                 }
             }
 
-            ps.executeBatch(); // Insert remaining records
-            conn.commit();     // Commit the entire batch
-
-            System.out.println("DAO: Batch insert completed. Total records: " + records.size());
+            ps.executeBatch(); // Insert any remaining records
+            conn.commit();
             return true;
 
         } catch (SQLException e) {
@@ -124,6 +133,8 @@ public class FeedingRecordDAO {
             return false;
         }
     }
+
+
 
     public boolean saveFeedingRecord(FeedingRecord record) {
         System.out.println("GETTING PIG WITH VALUE " + record.getPigId());

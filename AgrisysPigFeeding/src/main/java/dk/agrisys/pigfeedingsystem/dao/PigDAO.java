@@ -41,28 +41,28 @@ public class PigDAO {
 
         String sql = "INSERT INTO Pig (PigID, Number, Location, FCR, StartWeight, EndWeight, WeightGain, FeedIntake, TestDays, Duration) " +
                 "VALUES (?, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
-
-        // Remove pigs that already exist
+        // Fetch all existing PigIDs from DB
         Set<Long> existingPigs = getAllPigIds();
-        List<Pig> newPigs = pigs.stream()
-                .filter(p -> !existingPigs.contains(Long.parseLong(p.getTagNumber())))
-                .toList();
-
-        if (newPigs.isEmpty()) return true;
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             conn.setAutoCommit(false);
 
-            for (Pig pig : newPigs) {
-                ps.setLong(1, Long.parseLong(pig.getTagNumber()));
-                ps.addBatch();
+            //save just their ids for now using an extra check
+            for (Pig pig : pigs) {
+                long pigId = Long.parseLong(pig.getTagNumber());
+
+                if (!existingPigs.contains(pigId)) {
+                    ps.setLong(1, pigId);
+                    ps.addBatch();
+                    existingPigs.add(pigId); // cache the pig : solves everything
+                }
             }
 
             ps.executeBatch();
             conn.commit();
-            System.out.println("PigDAO: Batch pig insert completed. New pigs: " + newPigs.size());
+            System.out.println("PigDAO: Batch pig insert completed. New pigs: " + pigs.size());
             return true;
 
         } catch (SQLException e) {
@@ -73,19 +73,20 @@ public class PigDAO {
 
     public Set<Long> getAllPigIds() {
         Set<Long> pigIds = new HashSet<>();
-        String query = "SELECT PigID FROM Pig";
+        String sql = "SELECT PigID FROM Pig";
 
         try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
                 pigIds.add(rs.getLong("PigID"));
             }
-        } catch (SQLException e) {
-            System.err.println("PigDAO: Error fetching pig IDs: " + e.getMessage());
-        }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println("PIGDAO: Fetched " + String.valueOf(pigIds.stream().count()) + "pigIds from DB");
         return pigIds;
     }
 

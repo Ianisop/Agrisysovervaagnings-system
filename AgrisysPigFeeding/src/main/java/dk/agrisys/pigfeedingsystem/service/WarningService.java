@@ -30,9 +30,9 @@ public class WarningService {
         LocalDateTime threeDaysAgo = LocalDateTime.now().minusDays(3);
 
         for (Pig pig : allPigs) {
-            List<FeedingRecord> recentFeedings = feedingRecordDAO.getRecentFeedingsForPig(pig.getId(), threeDaysAgo);
+            List<FeedingRecord> recentFeedings = feedingRecordDAO.getRecentFeedingsForPig(pig.getTagNumber(), threeDaysAgo);
             double totalAmount = recentFeedings.stream()
-                    .mapToDouble(FeedingRecord::getAmountKg)
+                    .mapToDouble(FeedingRecord::getAmountInGrams)
                     .sum();
 
             if (totalAmount < MINIMUM_KG_PER_3_DAYS) {

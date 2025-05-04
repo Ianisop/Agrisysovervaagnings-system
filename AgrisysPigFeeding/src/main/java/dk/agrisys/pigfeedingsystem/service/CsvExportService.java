@@ -1,39 +1,72 @@
 package dk.agrisys.pigfeedingsystem.service;
 
-import dk.agrisys.pigfeedingsystem.model.FeedingRecord; // Eller hvad der nu skal eksporteres
+import dk.agrisys.pigfeedingsystem.model.FeedingRecord;
 
 import java.io.File;
+import java.io.FileWriter; // Use FileWriter for character-based output
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale; // To ensure correct decimal separator (.)
 
-// (Hvem har skrevet: [Dit Navn/Gruppens Navn])
+// Author: [Your Name/Group Name]
 public class CsvExportService {
 
-    // Denne metode skal implementeres til at skrive data til en CSV-fil
+    // DateTimeFormatter to ensure a consistent date/time format
+    // Choose the format that best suits CSV standards (e.g., ISO)
+    // If using LocalDate:
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    // If using LocalDateTime:
+    // private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    /**
+     * Exports a list of FeedingRecord objects to a CSV file.
+     *
+     * @param data The list of FeedingRecord objects to export.
+     * @param file The file to write to.
+     * @return true if the export was successful, false otherwise.
+     */
     public boolean exportToCsv(List<FeedingRecord> data, File file) {
         if (data == null || file == null) {
-            System.err.println("Service: CSV Export - Data eller fil er null.");
+            System.err.println("Service: CSV Export - Data or file must not be null.");
             return false;
         }
-        System.out.println("Service: Simulerer eksport til CSV-fil: " + file.getName());
-        System.out.println("         (RIGTIG IMPLEMENTERING MANGLER)");
 
-        // Simpel eksempel på filskrivning (uden rigtig CSV formattering)
-        try (PrintWriter writer = new PrintWriter(file)) {
-            // Skriv header
-            writer.println("RecordID;PigID;Timestamp;AmountKG");
-            // Skriv data
+        // Use try-with-resources to ensure the PrintWriter is closed correctly
+        // Use FileWriter to specify character set if needed (default is often ok)
+        try (PrintWriter writer = new PrintWriter(new FileWriter(file))) { // Use FileWriter for better control
+
+            // Write header - use a clear separator (here: semicolon)
+            // Ensure header names match the data
+            writer.println("RecordID;PigID;Date;AmountKG"); // Adjusted header for Date
+
+            // Write data line by line
             for (FeedingRecord record : data) {
-                writer.printf("%d;%d;%s;%.2f%n",
-                        record.getId(),
+                if (record == null) {
+                    System.err.println("Service: CSV Export - Ignoring null record in data list.");
+                    continue; // Skip null records
+                }
+                // Use Locale.US to ensure period as decimal separator
+                // Format the date using the formatter
+                writer.printf(Locale.US, "%d;%d;%s;%.2f%n", // Locale.US for '.' decimal
+                        record.getLocation(),
                         record.getPigId(),
-                        record.getTimestamp().toString(), // Simpel format
-                        record.getAmountKg());
+                        (record.getTimestamp() != null ? record.getTimestamp() : ""), // Handle null date
+                        record.getAmountInGrams());
             }
-            System.out.println("Service: CSV Eksport (simuleret) succesfuld.");
+
+            System.out.println("Service: CSV Export to '" + file.getAbsolutePath() + "' successful. Number of records: " + data.size());
             return true;
+
+        } catch (IOException e) {
+            // Log a more specific error for file IO
+            System.err.println("Service: Error writing to CSV file '" + file.getAbsolutePath() + "': " + e.getMessage());
+            e.printStackTrace(); // Print stack trace for debugging
+            return false;
         } catch (Exception e) {
-            System.err.println("Service: Fejl under CSV eksport: " + e.getMessage());
+            // Catch other unexpected errors
+            System.err.println("Service: Unexpected error during CSV export: " + e.getMessage());
             e.printStackTrace();
             return false;
         }

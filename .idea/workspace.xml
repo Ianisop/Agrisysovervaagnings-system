@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="74d7d523-6634-4feb-b5f6-d85e465b785c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+    <list default="true" id="afb8d8ca-70e1-4d2e-8a80-4fc551af7672" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/controller/MainDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/controller/MainDashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/resources/view/MainDashboardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/resources/view/MainDashboardView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/FeedingRecordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/FeedingRecordDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/PigDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/PigDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,19 +20,52 @@
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Laverenz&quot;
+    &quot;assignee&quot;: &quot;Magnusbekhoj&quot;
   }
 }</component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="TestAfCSV" />
+                    <option name="lastUsedInstant" value="1745924067" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="Database-auth" />
+                    <option name="lastUsedInstant" value="1745923904" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1745923903" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/Ianisop/pig.git&quot;,
-    &quot;accountId&quot;: &quot;6e818123-4b97-4dc7-9925-a90eb8d11109&quot;
+    &quot;accountId&quot;: &quot;a8a33ede-6f83-4626-b056-2a922f0639be&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
 }</component>
-  <component name="ProjectId" id="2wM2u6ksD5NYC8SJrlHKUIGmu4i" />
+  <component name="ProjectId" id="2wOgKBr77fZzMoNU0OKVGgpFepj" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -41,17 +73,17 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.App.executor": "Run",
+    "Application.Unnamed.executor": "Run",
+    "Maven.pigfeedingsystem [clean,install].executor": "Run",
     "Maven.pigfeedingsystem [clean].executor": "Run",
-    "Maven.pigfeedingsystem [compile].executor": "Run",
-    "Maven.pigfeedingsystem [jar:jar].executor": "Run",
+    "Maven.pigfeedingsystem [dependency:tree].executor": "Run",
     "Maven.pigfeedingsystem [javafx:run].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "dashboard-revamp",
-    "ignore.virus.scanning.warn.message": "true",
+    "git-widget-placeholder": "TestAfCSV",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/nokke/Documents/GitHub/pig/AgrisysPigFeeding/dependencies/javafx-sdk-24.0.1/lib",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -60,58 +92,76 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "sqlserver",
+      "sqlserver.localdb"
+    ]
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\nokke\Documents\GitHub\pig\AgrisysPigFeeding\dependencies" />
-    </key>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean" />
-      <command value="mvn jar:jar" />
-      <command value="mvn compile" />
+      <command value="mvn clean install" />
+      <command value="mvn dependency:tree" />
       <command value="mvn javafx:run" />
     </option>
   </component>
   <component name="RunManager">
-    <configuration name="App" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../../../../../Program Files/Java/jdk-24" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dk.App" />
       <module name="pigfeedingsystem" />
-      <option name="VM_PARAMETERS" value="--module-path javafx-sdk-24.0.1\lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path C:\Users\bekho\Desktop\javafx-sdk-24.0.1\lib --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
   </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
-      </set>
-    </attachedChunks>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="74d7d523-6634-4feb-b5f6-d85e465b785c" name="Changes" comment="" />
-      <created>1745837341443</created>
+      <changelist id="afb8d8ca-70e1-4d2e-8a80-4fc551af7672" name="Changes" comment="" />
+      <created>1745917969512</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1745837341443</updated>
-      <workItem from="1745837342466" duration="2713000" />
-      <workItem from="1745840125131" duration="295000" />
-      <workItem from="1745913455223" duration="1613000" />
-      <workItem from="1746096193036" duration="375000" />
+      <updated>1745917969512</updated>
+      <workItem from="1745917972088" duration="121000" />
+      <workItem from="1745918122552" duration="11120000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.time.DateTimeException" package="java.time" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.sql.BatchUpdateException" package="java.sql" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

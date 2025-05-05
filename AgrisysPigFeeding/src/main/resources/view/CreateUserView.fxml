@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="dk.agrisys.pigfeedingsystem.controller.CreateUserController" spacing="10" alignment="CENTER">
+    <TextField fx:id="usernameField" promptText="Enter Username" />
+    <PasswordField fx:id="passwordField" promptText="Enter Password" />
+    <Button text="Create User" onAction="#handleCreateUserAction" />
+    <Label fx:id="statusLabel" />
+</VBox>

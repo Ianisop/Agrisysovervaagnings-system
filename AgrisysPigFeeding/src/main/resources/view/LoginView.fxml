@@ -30,6 +30,11 @@
       <font>
          <Font name="Franklin Gothic Heavy" size="18.0" />
       </font></Button>
+    <Button id="createUserButton" onAction="#handleCreateUserButtonAction" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #00380E;" text="Create User" textFill="WHITE">
+      <font>
+         <Font name="Franklin Gothic Heavy" size="18.0" />
+      </font>
+    </Button>
 
     <Label fx:id="errorLabel" textFill="RED" />
 </VBox>

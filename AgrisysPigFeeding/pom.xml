@@ -35,6 +35,13 @@
             <classifier>win</classifier>
         </dependency>
 
+        <dependency>
+            <groupId>org.mindrot</groupId>
+            <artifactId>jbcrypt</artifactId>
+            <version>0.4</version>
+        </dependency>
+
+
         <!-- MSSQL JDBC Driver -->
         <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
@@ -66,7 +73,6 @@
             <version>2.20.0</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

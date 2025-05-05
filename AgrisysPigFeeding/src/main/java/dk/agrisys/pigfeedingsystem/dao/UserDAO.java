@@ -16,6 +16,7 @@ public class UserDAO {
 
     // --- Mock In-Memory "Database" ---
     private static final Map<String, User> mockUsers = new HashMap<>();
+    private User user;
 
     static {
         mockUsers.put("super", new User("super", "pass1", UserRole.SUPERUSER));
@@ -49,7 +50,7 @@ public class UserDAO {
         String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
         int roleId = (role == UserRole.SUPERUSER) ? 2 : 1;
 
-        String sql = "INSERT INTO [User] (Username, PasswordHash, RoleID) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO [User] (Username, PasswordHash, RoleID) VALUES (?, ?, ?)"; // add invite code column and value
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -125,6 +126,24 @@ public class UserDAO {
         } catch (Exception e) {
             System.err.println("DAO (DB): Unexpected error during login verification for '" + username + "': " + e.getMessage());
             e.printStackTrace();
+        }
+        return user;
+    }
+
+    public User getUser(String username)
+    {
+        String sql = "SELECT RoleID FROM [User] WHERE Username = ?";
+        User user = null;
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+            ResultSet rs = pstmt.executeQuery();
+        } catch (SQLException e) {
+        System.err.println("DAO (DB): SQL error during login verification for '" + username + "': " + e.getMessage());
+        e.printStackTrace();
+
+        return user;
         }
         return user;
     }

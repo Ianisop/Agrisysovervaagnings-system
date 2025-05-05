@@ -1,12 +1,13 @@
 package dk.agrisys.pigfeedingsystem.controller;
 
 import dk.App;
+import dk.agrisys.pigfeedingsystem.SessionContext;
+import dk.agrisys.pigfeedingsystem.dao.UserDAO;
 import dk.agrisys.pigfeedingsystem.model.FeedingRecord;
 import dk.agrisys.pigfeedingsystem.model.Pig;
-import dk.agrisys.pigfeedingsystem.service.CsvExportService;
-import dk.agrisys.pigfeedingsystem.service.ExcelImportService;
-import dk.agrisys.pigfeedingsystem.service.FeedingDataService;
-import dk.agrisys.pigfeedingsystem.service.WarningService;
+import dk.agrisys.pigfeedingsystem.model.User;
+import dk.agrisys.pigfeedingsystem.model.UserRole;
+import dk.agrisys.pigfeedingsystem.service.*;
 import dk.util.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -57,12 +58,34 @@ public class MainDashboardController implements IController {
 
     private Stage primaryStage;
 
+
+
     public void setPrimaryStage(Stage stage) {
         this.primaryStage = stage;
     }
 
     @FXML
     private void initialize() {
+        UserService userService = new UserService();
+        UserDAO userDAO = userService.getDAO();
+        User user = SessionContext.getCurrentUser();
+        System.out.println("GETTING USER: " + user);
+        if(user == null) return; // return if user doesnt exist
+        UserRole userRole = user.getRole();
+        System.out.println("USER ROLE IS: " + userRole);
+        //UserRole userRole = UserRole.USER;
+        if(userRole == null) return;
+
+
+        if(userRole == UserRole.SUPERUSER) {
+            adminTab.setDisable(false); // check if its an admin
+
+        }
+        else{
+            adminTab.setDisable(true); // check if its an admin
+            adminTab.getContent().setStyle("-fx-background-color: grey;");
+        }
+
 
     }
 

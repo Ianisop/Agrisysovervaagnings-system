@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.TextFlow?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.agrisys.pigfeedingsystem.controller.MainDashboardController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
@@ -49,7 +48,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="importXLSX" layoutX="14.0" layoutY="131.0" mnemonicParsing="false" style="-fx-background-color: darkgreen;" text="IMPORT XLSX" onAction="#importXLSX"/>
+                              <Button fx:id="importXLSX" layoutX="14.0" layoutY="131.0" mnemonicParsing="false" onAction="#importXLSX" style="-fx-background-color: darkgreen;" text="IMPORT XLSX" />
                               <Button fx:id="importCSV" layoutX="14.0" layoutY="171.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: darkgreen;" text="IMPORT CSV" />
                               <Button fx:id="exportXLSX" layoutX="487.0" layoutY="131.0" mnemonicParsing="false" style="-fx-background-color: darkgreen;" text="EXPORT XLSX" />
                               <Button fx:id="exportCSV" layoutX="487.0" layoutY="171.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: darkgreen;" text="EXPORT CSV" />
@@ -58,7 +57,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                  <Tab fx:id="adminTab" style="-fx-background-color: grey;" text="ADMIN">
+                  <Tab fx:id="adminTab" style="-fx-background-color: lightgreen;" text="ADMIN">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

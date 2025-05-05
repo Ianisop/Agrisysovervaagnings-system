@@ -4,6 +4,8 @@ import com.sun.tools.javac.Main;
 import dk.agrisys.pigfeedingsystem.controller.MainDashboardController;
 import dk.agrisys.pigfeedingsystem.dao.DatabaseConnector;
 import dk.agrisys.pigfeedingsystem.dao.FeedingRecordDAO;
+import dk.agrisys.pigfeedingsystem.dao.UserDAO;
+import dk.agrisys.pigfeedingsystem.model.User;
 import dk.agrisys.pigfeedingsystem.service.ExcelImportService;
 import dk.util.IController;
 import javafx.application.Application;
@@ -64,7 +66,7 @@ public class App extends Application {
         } else {
             System.out.println("CSS file /css/styles.css not found.");
         }
-        Object controller = loader.getController(); // has to fetch this in order to pass the stage'
+        Object controller = loader.getController(); // has to fetch this in order to pass the stage
         if (controller instanceof IController) {
             ((IController) controller).setPrimaryStage(primaryStage); // cooked hard
         }

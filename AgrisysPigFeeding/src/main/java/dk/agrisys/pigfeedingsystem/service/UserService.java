@@ -22,4 +22,9 @@ package dk.agrisys.pigfeedingsystem.service;
             User user = new User(username, password, role);
             return userDao.registerUserInDb(username, password, role); // Save user via DAO
         }
+
+        public UserDAO getDAO()
+        {
+            return userDao;
+        }
     }

@@ -1,6 +1,7 @@
 package dk.agrisys.pigfeedingsystem.controller;
 
 import dk.App;
+import dk.agrisys.pigfeedingsystem.SessionContext;
 import dk.agrisys.pigfeedingsystem.model.User;
 import dk.agrisys.pigfeedingsystem.service.AuthenticationService;
 import javafx.fxml.FXML;
@@ -68,6 +69,7 @@ public class LoginController {
 
             try {
                 // Gem bruger globalt hvis nødvendigt: App.setCurrentUser(authenticatedUser);
+                SessionContext.setCurrentUser(authenticatedUser);
                 App.loadScene("view/MainDashboardView.fxml");
             } catch (IOException e) {
                 e.printStackTrace();

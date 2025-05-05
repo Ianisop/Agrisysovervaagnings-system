@@ -1,7 +1,9 @@
 package dk.agrisys.pigfeedingsystem.controller;
 
 import dk.App;
+import dk.agrisys.pigfeedingsystem.Generator;
 import dk.agrisys.pigfeedingsystem.SessionContext;
+import dk.agrisys.pigfeedingsystem.dao.InviteCodeDAO;
 import dk.agrisys.pigfeedingsystem.dao.UserDAO;
 import dk.agrisys.pigfeedingsystem.model.FeedingRecord;
 import dk.agrisys.pigfeedingsystem.model.Pig;
@@ -21,6 +23,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -101,6 +104,28 @@ public class MainDashboardController implements IController {
 
     }
 
+
+    public void generateUserInvite(ActionEvent e)  {
+        String code = Generator.generate(16);
+        InviteCodeDAO inviteCodeDAO = new InviteCodeDAO();
+        try {
+            inviteCodeDAO.saveCodeToDb(code);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public void generateAdminInvite(ActionEvent e)
+    {
+        String code = Generator.generate(16);
+        InviteCodeDAO inviteCodeDAO = new InviteCodeDAO();
+        try {
+            inviteCodeDAO.saveCodeToDb(code);
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+    }
 
 
 

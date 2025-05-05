@@ -1,5 +1,5 @@
 package dk.agrisys.pigfeedingsystem.dao;
-
+import dk.agrisys.pigfeedingsystem.Generator;
 import dk.agrisys.pigfeedingsystem.model.User;
 import dk.agrisys.pigfeedingsystem.model.UserRole;
 
@@ -30,7 +30,7 @@ public class UserDAO {
     }
 
     // Mock method to create a user
-    public boolean createUser(String username, String password, UserRole role) {
+    public boolean createUser(String username, String password, UserRole role, int id) {
         if (username == null || username.trim().isEmpty() || password == null || password.isEmpty() || role == null) {
             System.err.println("DAO (Mock): Invalid input for createUser.");
             return false;
@@ -41,7 +41,7 @@ public class UserDAO {
     }
 
     // === Method: Register a new user in the database ===
-    public boolean registerUserInDb(String username, String plainPassword, UserRole role) {
+    public boolean registerUserInDb(String username, String plainPassword, UserRole role, int userID) {
         if (username == null || username.trim().isEmpty() || plainPassword == null || plainPassword.isEmpty() || role == null) {
             System.err.println("DAO (DB): Invalid input for registerUserInDb.");
             return false;
@@ -50,7 +50,7 @@ public class UserDAO {
         String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
         int roleId = (role == UserRole.SUPERUSER) ? 2 : 1;
 
-        String sql = "INSERT INTO [User] (Username, PasswordHash, RoleID) VALUES (?, ?, ?)"; // add invite code column and value
+        String sql = "INSERT INTO [User] (Username, PasswordHash, RoleID,UserID) VALUES (?,?, ?, ?)"; // add invite code column and value
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -63,6 +63,8 @@ public class UserDAO {
             pstmt.setString(1, username.trim());
             pstmt.setString(2, hashedPassword);
             pstmt.setInt(3, roleId);
+            pstmt.setInt(4,user.getId());
+
 
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
@@ -106,6 +108,7 @@ public class UserDAO {
 
             if (rs.next()) {
                 String storedHash = rs.getString("PasswordHash");
+                int userId = rs.getInt("UserID");
 
                 if (BCrypt.checkpw(plainPassword, storedHash)) {
                     int roleId = rs.getInt("RoleID");

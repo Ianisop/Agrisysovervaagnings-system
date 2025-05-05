@@ -11,6 +11,9 @@ public class InviteCodeDAO {
     }
 
     public boolean saveCodeToDb(String code) throws SQLException {
+        UserDAO userDAO = new UserDAO();
+        boolean userExists = userDAO.validateUserID(Integer.parseInt(SessionContext.getCurrentUser().getId()));
+        if(!userExists) System.out.println("USER ID DOESNTE XIST!!!!!!!!!!!");
         String query = "INSERT INTO Invites (Code,CreatedAt,UsedBy,CreatedBy) VALUES(?,CAST(? AS DATETIME2),NULL,?)";
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {

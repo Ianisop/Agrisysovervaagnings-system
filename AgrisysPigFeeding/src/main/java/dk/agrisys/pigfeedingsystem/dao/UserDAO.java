@@ -150,4 +150,21 @@ public class UserDAO {
         }
         return user;
     }
+    public boolean validateUserID(int id)
+    {
+        String sql = "SELECT UserID FROM [User] WHERE UserID = ?";
+        User user = null;
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            ResultSet rs = pstmt.executeQuery();
+        } catch (SQLException e) {
+            System.err.println("DAO (DB): SQL error during login verification for '" + id + "': " + e.getMessage());
+            e.printStackTrace();
+
+            return false;
+        }
+        return true;
+    }
 }

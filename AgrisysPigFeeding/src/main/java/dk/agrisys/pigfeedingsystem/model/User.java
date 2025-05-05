@@ -1,24 +1,35 @@
 package dk.agrisys.pigfeedingsystem.model;
 
 import dk.agrisys.pigfeedingsystem.Generator;
-import dk.agrisys.pigfeedingsystem.dao.InviteCodeDAO;
 
-// (Hvem har skrevet: [Dit Navn/Gruppens Navn])
 public class User {
     private String username;
-    private String password; // NB: Gem ALDRIG passwords i klartekst i et rigtigt system!
+    private String password; // NB: Never store passwords in plain text in a real system!
     private UserRole role;
-    private int userId;
+    private String userId; // Changed to String to handle non-integer IDs
 
     public User(String username, String password, UserRole role) {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.userId = Integer.parseInt(Generator.generate(16));
+
+        // Generate a valid ID as a String
+        this.userId = Generator.generate(8); // Ensure the generator produces a valid unique string
     }
 
-    public String getUsername() { return username; }
-    public String getPassword() { return password; } // Kun til simpel demo
-    public UserRole getRole() { return role; }
-    public int getId(){return userId;}
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password; // For demo purposes only
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public String getId() {
+        return userId;
+    }
 }

@@ -14,7 +14,7 @@ public class InviteCodeDAO {
     }
 
     public boolean saveCodeToDb(String code) throws SQLException {
-        String query = "INSERT INTO Invites (Code,CreatedAt,UsedBy,CreatedBy),VALUES(?,CAST(? AS DATETIME2),NULL,?)";
+        String query = "INSERT INTO Invites (Code,CreatedAt,UsedBy,CreatedBy) VALUES(?,CAST(? AS DATETIME2),NULL,?)";
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
@@ -24,15 +24,17 @@ public class InviteCodeDAO {
             }
             Timestamp timestamp = new Timestamp(System.currentTimeMillis()); // get current time
             User user = SessionContext.getCurrentUser();
-            pstmt.setString(0, code);
-            pstmt.setTimestamp(1, timestamp);
-            pstmt.setInt(3, user.getId());
+            pstmt.setString(1, code);
+            pstmt.setTimestamp(2, timestamp);
+            pstmt.setString(3, user.getId());
 
 
             int rowsAffected = pstmt.executeUpdate();
 
 
-        }catch(SQLException e)
+        }catch(SQLException e) {
+            System.out.println("DAO (DB): Failed to save invite code to database: " + e.getMessage());
+        }
         {
 
         }

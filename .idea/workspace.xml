@@ -5,14 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74d7d523-6634-4feb-b5f6-d85e465b785c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/Generator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/InviteCodeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d2cfa1d2-b27a-4006-b3d9-15e4b33af428.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d2cfa1d2-b27a-4006-b3d9-15e4b33af428/storage_v2/_src_/database/Agrisys.sCSwJA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d2cfa1d2-b27a-4006-b3d9-15e4b33af428/storage_v2/_src_/database/Agrisys.sCSwJA/schema/INFORMATION_SCHEMA.NBgcMw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d2cfa1d2-b27a-4006-b3d9-15e4b33af428/storage_v2/_src_/database/Agrisys.sCSwJA/schema/dbo.sYMBAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/d2cfa1d2-b27a-4006-b3d9-15e4b33af428/storage_v2/_src_/database/Agrisys.sCSwJA/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/controller/MainDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/controller/MainDashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/InviteCodeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/InviteCodeDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/resources/view/MainDashboardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/resources/view/MainDashboardView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,37 +61,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Maven.pigfeedingsystem [clean].executor": "Run",
-    "Maven.pigfeedingsystem [compile].executor": "Run",
-    "Maven.pigfeedingsystem [jar:jar].executor": "Run",
-    "Maven.pigfeedingsystem [javafx:run].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/nokke/Documents/GitHub/pig/AgrisysPigFeeding/dependencies/javafx-sdk-24.0.1/lib",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.pigfeedingsystem [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.pigfeedingsystem [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.pigfeedingsystem [jar:jar].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.pigfeedingsystem [javafx:run].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/nokke/Documents/GitHub/pig/AgrisysPigFeeding/dependencies/javafx-sdk-24.0.1/lib&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "sqlserver"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;sqlserver&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\nokke\Documents\GitHub\pig\AgrisysPigFeeding\dependencies" />
@@ -137,6 +141,7 @@
       <workItem from="1746097781141" duration="3159000" />
       <workItem from="1746174568330" duration="299000" />
       <workItem from="1746175598714" duration="3910000" />
+      <workItem from="1746442739583" duration="1490000" />
     </task>
     <servers />
   </component>

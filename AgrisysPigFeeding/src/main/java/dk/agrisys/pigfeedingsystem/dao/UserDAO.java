@@ -63,7 +63,7 @@ public class UserDAO {
             pstmt.setString(1, username.trim());
             pstmt.setString(2, hashedPassword);
             pstmt.setInt(3, roleId);
-            pstmt.setInt(4,user.getId());
+            pstmt.setInt(4, userID);
 
 
             int rowsAffected = pstmt.executeUpdate();

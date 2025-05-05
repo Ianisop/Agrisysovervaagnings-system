@@ -152,7 +152,7 @@ public class UserDAO {
     }
     public boolean validateUserID(int id)
     {
-        String sql = "SELECT UserID FROM [User] WHERE UserID = ?";
+        String sql = "SELECT * FROM [User] WHERE UserID = ?";
         User user = null;
 
         try (Connection conn = DatabaseConnector.getConnection();

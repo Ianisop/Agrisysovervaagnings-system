@@ -10,11 +10,13 @@ public class InviteCodeDAO {
         return UUID.randomUUID().toString();
     }
 
-    public boolean saveCodeToDb(String code) throws SQLException {
+    public boolean saveCodeToDb(String code, boolean isAdmin) throws SQLException {
         UserDAO userDAO = new UserDAO();
         boolean userExists = userDAO.validateUserID(Integer.parseInt(SessionContext.getCurrentUser().getId()));
-        if(!userExists) System.out.println("USER ID DOESNTE XIST!!!!!!!!!!!");
-        String query = "INSERT INTO Invites (Code,CreatedAt,UsedBy,CreatedBy) VALUES(?,CAST(? AS DATETIME2),NULL,?)";
+        if(!userExists) System.out.println("USER ID DOESNT EXIST!!!!!!!!!!!");
+
+
+        String query = "INSERT INTO Invites (Code,CreatedAt,UsedBy,isAdmin,CreatedBy) VALUES(?,CAST(? AS DATETIME2),NULL,?,?)";
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 
@@ -26,7 +28,8 @@ public class InviteCodeDAO {
             User user = SessionContext.getCurrentUser();
             pstmt.setLong(1, Long.parseLong(code));
             pstmt.setTimestamp(2, timestamp);
-            pstmt.setInt(3, Integer.parseInt(user.getId()));
+            pstmt.setBoolean(3,isAdmin);
+            pstmt.setInt(4, Integer.parseInt(user.getId()));
 
 
             int rowsAffected = pstmt.executeUpdate();

@@ -109,7 +109,7 @@ public class MainDashboardController implements IController {
         String code = Generator.generate(16);
         InviteCodeDAO inviteCodeDAO = new InviteCodeDAO();
         try {
-            inviteCodeDAO.saveCodeToDb(code);
+            inviteCodeDAO.saveCodeToDb(code, false);
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
@@ -120,7 +120,7 @@ public class MainDashboardController implements IController {
         String code = Generator.generate(16);
         InviteCodeDAO inviteCodeDAO = new InviteCodeDAO();
         try {
-            inviteCodeDAO.saveCodeToDb(code);
+            inviteCodeDAO.saveCodeToDb(code, true);
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }

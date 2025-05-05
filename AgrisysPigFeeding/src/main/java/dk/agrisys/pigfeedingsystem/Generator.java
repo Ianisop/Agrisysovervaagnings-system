@@ -1,9 +1,16 @@
 package dk.agrisys.pigfeedingsystem;
 
+import java.security.SecureRandom;
 import java.util.UUID;
 
 public class Generator {
-    public static String generate(int length){
-        return UUID.randomUUID().toString().substring(0,length);
+    private static final SecureRandom random = new SecureRandom();
+
+    public static String generate(int length) {
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            sb.append(random.nextInt(10)); // Generates a digit between 0 and 9
+        }
+        return sb.toString();
     }
 }

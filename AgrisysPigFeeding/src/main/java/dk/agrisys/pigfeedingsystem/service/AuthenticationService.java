@@ -14,11 +14,8 @@ public class AuthenticationService {
     }
 
     public User authenticate(String username, String password) {
-        User user = userDAO.findUserByUsername(username);
-        if (user != null && user.getPassword().equals(password)) { // Simpel password tjek!
-            System.out.println("Service: Bruger " + username + " autentificeret.");
-            return user;
-        }
+        User user = userDAO.verifyUserLoginFromDb(username,password);
+        if(user != null) return user;
         System.out.println("Service: Autentificering fejlede for " + username);
         return null;
     }

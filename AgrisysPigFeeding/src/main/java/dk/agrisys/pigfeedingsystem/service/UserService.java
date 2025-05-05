@@ -1,5 +1,6 @@
 package dk.agrisys.pigfeedingsystem.service;
 
+    import dk.agrisys.pigfeedingsystem.dao.InviteCodeDAO;
     import dk.agrisys.pigfeedingsystem.dao.UserDAO;
     import dk.agrisys.pigfeedingsystem.model.User;
     import dk.agrisys.pigfeedingsystem.model.UserRole;
@@ -12,12 +13,14 @@ package dk.agrisys.pigfeedingsystem.service;
             this.userDao = new UserDAO();
         }
 
-        public boolean createUser(String username, String password, UserRole userRole) {
+        public boolean createUser(String username, String password, String inviteCode) {
             if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
                 return false; // Validation failed
             }
 
-            UserRole role = UserRole.USER;
+            InviteCodeDAO ico = new InviteCodeDAO();
+            UserRole role = ico.getInviteCodeRoleType(inviteCode) ? UserRole.SUPERUSER : UserRole.USER;
+
 
             User user = new User(username, password, role);
             return userDao.registerUserInDb(username, password, role, Integer.parseInt(user.getId())); // Save user via DAO

@@ -18,6 +18,9 @@ public class CreateUserController {
     private TextField passwordField;
 
     @FXML
+    private TextField inviteCodeField;
+
+    @FXML
     private Label statusLabel;
 
     private final UserService userService;
@@ -37,6 +40,7 @@ public class CreateUserController {
     private void handleCreateUserAction() {
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String inviteCode = inviteCodeField.getText();
 
         // Input validation
         if (isEmpty(username) || isEmpty(password)) {
@@ -45,7 +49,7 @@ public class CreateUserController {
         }
 
         try {
-            boolean success = userService.createUser(username, password, UserRole.USER); // Create regular USER
+            boolean success = userService.createUser(username, password, inviteCode); // Create regular USER
             if (success) {
                 showStatus("User created successfully!", "green");
                 clearFields();

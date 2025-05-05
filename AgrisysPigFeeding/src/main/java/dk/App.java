@@ -1,13 +1,17 @@
 package dk;
 
+import com.sun.tools.javac.Main;
+import dk.agrisys.pigfeedingsystem.controller.MainDashboardController;
 import dk.agrisys.pigfeedingsystem.dao.DatabaseConnector;
 import dk.agrisys.pigfeedingsystem.dao.FeedingRecordDAO;
 import dk.agrisys.pigfeedingsystem.service.ExcelImportService;
+import dk.util.IController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.poi.ss.formula.functions.T;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +44,8 @@ public class App extends Application {
             fxmlFile = "/" + fxmlFile.replace("dk/agrisys/", "");
         }
 
+        FXMLLoader loader = new FXMLLoader();
+
         URL fxmlUrl = App.class.getResource(fxmlFile);
         if (fxmlUrl == null) {
             System.err.println("Error: Could not find FXML file: " + fxmlFile);
@@ -47,7 +53,7 @@ public class App extends Application {
         }
         System.out.println("Loading FXML: " + fxmlUrl);
 
-        Parent root = FXMLLoader.load(fxmlUrl);
+        Parent root = loader.load(fxmlUrl);
         Scene scene = new Scene(root);
 
         // Apply CSS if the file exists
@@ -58,6 +64,11 @@ public class App extends Application {
         } else {
             System.out.println("CSS file /css/styles.css not found.");
         }
+        Object controller = loader.getController(); // has to fetch this in order to pass the stage'
+        if (controller instanceof IController) {
+            ((IController) controller).setPrimaryStage(primaryStage); // cooked hard
+        }
+
 
         primaryStage.setScene(scene);
         primaryStage.sizeToScene();

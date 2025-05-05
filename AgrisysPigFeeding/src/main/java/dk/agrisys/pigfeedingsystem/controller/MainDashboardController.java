@@ -7,13 +7,16 @@ import dk.agrisys.pigfeedingsystem.service.CsvExportService;
 import dk.agrisys.pigfeedingsystem.service.ExcelImportService;
 import dk.agrisys.pigfeedingsystem.service.FeedingDataService;
 import dk.agrisys.pigfeedingsystem.service.WarningService;
+import dk.util.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +24,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 // (Hvem har skrevet: [Dit Navn/Gruppens Navn])
-public class MainDashboardController {
+public class MainDashboardController implements IController {
     @FXML // fx:id="adminTab"
     private Tab adminTab; // Value injected by FXMLLoader
 
@@ -52,10 +55,29 @@ public class MainDashboardController {
     @FXML // fx:id="kpiTab"
     private Tab kpiTab; // Value injected by FXMLLoader
 
+    private Stage primaryStage;
+
+    public void setPrimaryStage(Stage stage) {
+        this.primaryStage = stage;
+    }
+
     @FXML
     private void initialize() {
 
     }
+
+    public void ImportXLSX(ActionEvent e)
+    {
+        FileChooser fileChooser = new FileChooser();
+        ExcelImportService eis = new ExcelImportService();
+        // filter out xlsx files
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Excel Spreadsheets", "*.xlsx"));
+        File selectedFile = fileChooser.showOpenDialog(primaryStage);
+        eis.importFromExcel(selectedFile); // import from Excel file using the selected file
+    }
+
+
+
 
 
 

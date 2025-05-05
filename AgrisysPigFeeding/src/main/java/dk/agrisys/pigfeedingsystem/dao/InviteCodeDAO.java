@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.UUID;
 
 public class InviteCodeDAO {
+    public static final String INITIAL_CODE = "0123456789";
     public String generateCode(){
         return UUID.randomUUID().toString();
     }
@@ -51,7 +52,7 @@ public class InviteCodeDAO {
     public void createInitialUser()
     {
         UserService userService = new UserService();
-        userService.createUser("admin","admin","0123456789");
+        userService.createUser("admin","admin",INITIAL_CODE);
 
     }
 
@@ -68,7 +69,7 @@ public class InviteCodeDAO {
             }
             Timestamp timestamp = new Timestamp(System.currentTimeMillis()); // get current time
             User user = SessionContext.getCurrentUser();
-            pstmt.setLong(1, Long.parseLong("0123456789")); // initial admin code is 0123456789
+            pstmt.setLong(1, Long.parseLong(INITIAL_CODE)); // initial admin code is 0123456789
             pstmt.setBoolean(2, true); // initial code is admin
             pstmt.setTimestamp(3, timestamp);
 

@@ -41,8 +41,8 @@ public class UserDAO {
     }
 
     // === Method: Register a new user in the database ===
-    public boolean registerUserInDb(String username, String plainPassword, UserRole role, int userID) {
-        if (username == null || username.trim().isEmpty() || plainPassword == null || plainPassword.isEmpty() || role == null) {
+    public boolean registerUserInDb(String username, String plainPassword, UserRole role, int userID, String inviteCode) {
+        if (username == null || username.trim().isEmpty() || plainPassword == null || plainPassword.isEmpty() || role == null || inviteCode == null || inviteCode.isEmpty()) {
             System.err.println("DAO (DB): Invalid input for registerUserInDb.");
             return false;
         }
@@ -50,45 +50,70 @@ public class UserDAO {
         String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
         int roleId = (role == UserRole.SUPERUSER) ? 2 : 1;
 
-        String sql = "INSERT INTO [User] (Username, PasswordHash, RoleID,UserID) VALUES (?,?, ?, ?)"; // add invite code column and value
+        String insertUserSQL = "INSERT INTO [User] (Username, PasswordHash, RoleID, UserID) VALUES (?, ?, ?, ?)";
+        String updateInviteSQL = "UPDATE Invites SET UsedBy = ?, Used = 1 WHERE Code = ?";
 
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
+        try (Connection conn = DatabaseConnector.getConnection()) {
             if (conn == null) {
                 System.err.println("DAO (DB): Failed to establish database connection.");
                 return false;
             }
 
-            pstmt.setString(1, username.trim());
-            pstmt.setString(2, hashedPassword);
-            pstmt.setInt(3, roleId);
-            pstmt.setInt(4, userID);
+            conn.setAutoCommit(false); // Start transaction
 
+            try (
+                    PreparedStatement insertUserStmt = conn.prepareStatement(insertUserSQL);
+                    PreparedStatement updateInviteStmt = conn.prepareStatement(updateInviteSQL)
+            ) {
+                // Insert new user
+                insertUserStmt.setString(1, username.trim());
+                insertUserStmt.setString(2, hashedPassword);
+                insertUserStmt.setInt(3, roleId);
+                insertUserStmt.setInt(4, userID);
+                int userInsertResult = insertUserStmt.executeUpdate();
 
-            int rowsAffected = pstmt.executeUpdate();
-            if (rowsAffected > 0) {
-                System.out.println("DAO (DB): User '" + username + "' successfully registered.");
+                if (userInsertResult == 0) {
+                    conn.rollback();
+                    System.err.println("DAO (DB): Failed to insert user.");
+                    return false;
+                }
+
+                // Update invite
+                updateInviteStmt.setInt(1, userID);
+                updateInviteStmt.setString(2, inviteCode);
+                int inviteUpdateResult = updateInviteStmt.executeUpdate();
+
+                if (inviteUpdateResult == 0) {
+                    conn.rollback();
+                    System.err.println("DAO (DB): Invalid or already used invite code.");
+                    return false;
+                }
+
+                conn.commit();
+                System.out.println("DAO (DB): User registered and invite marked as used.");
                 return true;
-            } else {
-                System.err.println("DAO (DB): No rows affected for '" + username + "'.");
-                return false;
+            } catch (SQLException e) {
+                conn.rollback(); // rollback on error
+                throw e;
+            } finally {
+                conn.setAutoCommit(true); // restore autocommit
             }
 
         } catch (SQLException e) {
             if (e.getErrorCode() == 2627 || e.getErrorCode() == 2601) {
                 System.err.println("DAO (DB): Username '" + username + "' already exists.");
             } else {
-                System.err.println("DAO (DB): SQL error during registration of '" + username + "': " + e.getMessage());
-                e.printStackTrace();
+                System.err.println("DAO (DB): SQL error: " + e.getMessage());
             }
+            e.printStackTrace();
             return false;
         } catch (Exception e) {
-            System.err.println("DAO (DB): Unexpected error during registration of '" + username + "': " + e.getMessage());
+            System.err.println("DAO (DB): Unexpected error: " + e.getMessage());
             e.printStackTrace();
             return false;
         }
     }
+
 
     // === Method: Verify user login credentials ===
     public User verifyUserLoginFromDb(String username, String plainPassword) {

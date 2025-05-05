@@ -4,6 +4,7 @@ import com.sun.tools.javac.Main;
 import dk.agrisys.pigfeedingsystem.controller.MainDashboardController;
 import dk.agrisys.pigfeedingsystem.dao.DatabaseConnector;
 import dk.agrisys.pigfeedingsystem.dao.FeedingRecordDAO;
+import dk.agrisys.pigfeedingsystem.dao.InviteCodeDAO;
 import dk.agrisys.pigfeedingsystem.dao.UserDAO;
 import dk.agrisys.pigfeedingsystem.model.User;
 import dk.agrisys.pigfeedingsystem.service.ExcelImportService;
@@ -31,7 +32,9 @@ public class App extends Application {
         System.out.println("Testing database driver...");
         DatabaseConnector.testConnection();
         System.out.println("Database driver test completed.");
-
+        InviteCodeDAO invCodeDao = new InviteCodeDAO();
+        invCodeDao.createInitialCode();
+        System.out.println("INITIAL CODE CREATED!");
         // Start with the login view
         loadScene("view/LoginView.fxml");
 

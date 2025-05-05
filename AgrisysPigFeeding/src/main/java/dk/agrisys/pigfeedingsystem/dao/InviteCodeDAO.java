@@ -42,4 +42,34 @@ public class InviteCodeDAO {
 
         return false;
     }
+
+    //creates intiail admin code
+    public void createInitialCode()
+    {
+        String query = "INSERT INTO Invites (Code,isAdmin,CreatedAt,UsedBy,CreatedBy) VALUES(?,?,CAST(? AS DATETIME2),NULL,?)";
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            if (conn == null) {
+                System.err.println("DAO (DB): Failed to establish database connection.");
+
+            }
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis()); // get current time
+            User user = SessionContext.getCurrentUser();
+            pstmt.setLong(1, Long.parseLong("0123456789")); // initial admin code is 0123456789
+            pstmt.setBoolean(2, true); // initial code is admin
+            pstmt.setTimestamp(3, timestamp);
+            pstmt.setString(4, user.getId());
+
+
+            int rowsAffected = pstmt.executeUpdate();
+
+
+        }catch(SQLException e) {
+            System.out.println("DAO (DB): Failed to save invite code to database: " + e.getMessage());
+        }
+        {
+
+        }
+    }
 }

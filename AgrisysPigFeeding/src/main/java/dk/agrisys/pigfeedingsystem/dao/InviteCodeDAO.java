@@ -23,7 +23,7 @@ public class InviteCodeDAO {
             User user = SessionContext.getCurrentUser();
             pstmt.setLong(1, Long.parseLong(code));
             pstmt.setTimestamp(2, timestamp);
-            pstmt.setString(3, user.getId());
+            pstmt.setInt(3, Integer.parseInt(user.getId()));
 
 
             int rowsAffected = pstmt.executeUpdate();
@@ -43,7 +43,7 @@ public class InviteCodeDAO {
     //creates intiail admin code
     public void createInitialCode()
     {
-        String query = "INSERT INTO Invites (Code,isAdmin,CreatedAt,UsedBy,CreatedBy) VALUES(?,?,CAST(? AS DATETIME2),NULL,?)";
+        String query = "INSERT INTO Invites (Code,isAdmin,CreatedAt,UsedBy,CreatedBy) VALUES(?,?,CAST(? AS DATETIME2),NULL,NULL)";
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(query)) {
 

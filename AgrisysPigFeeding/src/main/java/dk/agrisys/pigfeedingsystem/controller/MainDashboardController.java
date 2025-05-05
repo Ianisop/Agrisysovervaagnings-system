@@ -66,14 +66,16 @@ public class MainDashboardController implements IController {
 
     }
 
-    public void ImportXLSX(ActionEvent e)
+    //Method to import data into the db using an excel file on click
+    public void importXLSX(ActionEvent e)
     {
         FileChooser fileChooser = new FileChooser();
         ExcelImportService eis = new ExcelImportService();
         // filter out xlsx files
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Excel Spreadsheets", "*.xlsx"));
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
-        eis.importFromExcel(selectedFile); // import from Excel file using the selected file
+        if(selectedFile != null)  eis.importFromExcel(selectedFile); // import from Excel if the user chooses a file
+
     }
 
 

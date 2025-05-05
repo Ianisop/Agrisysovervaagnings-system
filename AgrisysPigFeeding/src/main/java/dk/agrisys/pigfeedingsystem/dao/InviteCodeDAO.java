@@ -24,7 +24,7 @@ public class InviteCodeDAO {
             }
             Timestamp timestamp = new Timestamp(System.currentTimeMillis()); // get current time
             User user = SessionContext.getCurrentUser();
-            pstmt.setString(1, code);
+            pstmt.setLong(1, Long.parseLong(code));
             pstmt.setTimestamp(2, timestamp);
             pstmt.setString(3, user.getId());
 

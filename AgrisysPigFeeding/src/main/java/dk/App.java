@@ -8,6 +8,7 @@ import dk.agrisys.pigfeedingsystem.dao.InviteCodeDAO;
 import dk.agrisys.pigfeedingsystem.dao.UserDAO;
 import dk.agrisys.pigfeedingsystem.model.User;
 import dk.agrisys.pigfeedingsystem.service.ExcelImportService;
+import dk.agrisys.pigfeedingsystem.service.UserService;
 import dk.util.IController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -34,7 +35,8 @@ public class App extends Application {
         System.out.println("Database driver test completed.");
         InviteCodeDAO invCodeDao = new InviteCodeDAO();
         invCodeDao.createInitialCode();
-        System.out.println("INITIAL CODE CREATED!");
+        invCodeDao.createInitialUser();
+        System.out.println("INITIAL CODE && USER CREATED!");
         // Start with the login view
         loadScene("view/LoginView.fxml");
 

@@ -1,6 +1,7 @@
 package dk.agrisys.pigfeedingsystem.dao;
 import dk.agrisys.pigfeedingsystem.SessionContext;
 import dk.agrisys.pigfeedingsystem.model.User;
+import dk.agrisys.pigfeedingsystem.service.UserService;
 
 import java.sql.*;
 import java.util.UUID;
@@ -44,6 +45,14 @@ public class InviteCodeDAO {
 
 
         return false;
+    }
+
+
+    public void createInitialUser()
+    {
+        UserService userService = new UserService();
+        userService.createUser("admin","admin","0123456789");
+
     }
 
     //creates intiail admin code

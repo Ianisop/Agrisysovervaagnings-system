@@ -16,6 +16,7 @@ public class InviteCodeDAO {
         UserDAO userDAO = new UserDAO();
         boolean userExists = userDAO.validateUserID(Integer.parseInt(SessionContext.getCurrentUser().getId()));
         if(!userExists) System.out.println("USER ID DOESNT EXIST!!!!!!!!!!!");
+        System.out.println("USERID: " + SessionContext.getCurrentUser().getId());
 
 
         String query = "INSERT INTO Invites (Code,CreatedAt,UsedBy,isAdmin,CreatedBy) VALUES(?,CAST(? AS DATETIME2),NULL,?,?)";

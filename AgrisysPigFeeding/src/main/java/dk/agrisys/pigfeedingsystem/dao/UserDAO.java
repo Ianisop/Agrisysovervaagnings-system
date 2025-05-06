@@ -19,8 +19,8 @@ public class UserDAO {
     private User user;
 
     static {
-        mockUsers.put("super", new User("super", "pass1", UserRole.SUPERUSER));
-        mockUsers.put("user", new User("user", "pass2", UserRole.USER));
+        mockUsers.put("super", new User("super", "pass1", UserRole.SUPERUSER, Generator.generate(8)));
+        mockUsers.put("user", new User("user", "pass2", UserRole.USER, Generator.generate(8)));
         System.out.println("DAO: Mock users initialized (INSECURE).");
     }
 
@@ -36,7 +36,8 @@ public class UserDAO {
             return false;
         }
 
-        User user = new User(username, password, role);
+
+        User user = new User(username, password, role, Generator.generate(8));
         return mockUsers.putIfAbsent(username, user) == null;
     }
 
@@ -51,7 +52,7 @@ public class UserDAO {
         int roleId = (role == UserRole.SUPERUSER) ? 2 : 1;
 
         String insertUserSQL = "INSERT INTO [User] (Username, PasswordHash, RoleID, UserID) VALUES (?, ?, ?, ?)";
-        String updateInviteSQL = "UPDATE Invites SET UsedBy = ?, Used = 1 WHERE Code = ?";
+        String updateInviteSQL = "UPDATE Invites SET UsedBy = ? WHERE Code = ?";
 
         try (Connection conn = DatabaseConnector.getConnection()) {
             if (conn == null) {
@@ -139,7 +140,7 @@ public class UserDAO {
                     int roleId = rs.getInt("RoleID");
                     UserRole role = (roleId == 2) ? UserRole.SUPERUSER : UserRole.USER;
 
-                    user = new User(username, null, role);
+                    user = new User(username, null, role,String.valueOf(userId));
                     System.out.println("DAO (DB): Login successful for: " + username);
                 } else {
                     System.out.println("DAO (DB): Incorrect password for: " + username);

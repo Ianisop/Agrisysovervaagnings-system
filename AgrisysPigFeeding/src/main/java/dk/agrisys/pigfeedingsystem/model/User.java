@@ -8,13 +8,14 @@ public class User {
     private UserRole role;
     private String userId; // Changed to String to handle non-integer IDs
 
-    public User(String username, String password, UserRole role) {
+    public User(String username, String password, UserRole role, String userId) {
         this.username = username;
         this.password = password;
         this.role = role;
 
+
         // Generate a valid ID as a String
-        this.userId = Generator.generate(8); // Ensure the generator produces a valid unique string
+        this.userId = userId; // Ensure the generator produces a valid unique string
     }
 
     public String getUsername() {

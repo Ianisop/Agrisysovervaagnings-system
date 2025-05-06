@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -43,6 +44,8 @@ public class MainDashboardController implements IController {
 
     @FXML // fx:id="exportXLSX"
     private Button exportXLSX; // Value injected by FXMLLoader
+    @FXML // fx:id="inviteCodeTextDisplay"
+    private Text inviteCodeTextDisplay; // Value injected by FXMLLoader
 
     @FXML // fx:id="generateAdminInvite"
     private Button generateAdminInvite; // Value injected by FXMLLoader
@@ -113,6 +116,7 @@ public class MainDashboardController implements IController {
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
+        inviteCodeTextDisplay.setText(code);
     }
 
     public void generateAdminInvite(ActionEvent e)
@@ -125,6 +129,7 @@ public class MainDashboardController implements IController {
             throw new RuntimeException(ex);
         }
 
+        inviteCodeTextDisplay.setText(code);
     }
 
 

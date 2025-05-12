@@ -8,6 +8,7 @@ import dk.agrisys.pigfeedingsystem.model.User;
 import dk.agrisys.pigfeedingsystem.model.UserRole;
 import dk.agrisys.pigfeedingsystem.service.CsvExportService;
 import dk.agrisys.pigfeedingsystem.service.ExcelImportService;
+import dk.agrisys.pigfeedingsystem.service.FeedingDataService;
 import dk.util.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +24,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class MainDashboardController implements IController {
@@ -138,12 +140,34 @@ public class MainDashboardController implements IController {
       }
 
     private List<Pig> fetchPigs() {
-        // Replace with actual database logic to fetch pigs
-        return List.of(); // Example: Return an empty list
+        FeedingDataService service = new FeedingDataService();
+        return service.getAllPigs();
     }
 
     private List<FeedingRecord> fetchFeedingRecords() {
-        // Replace with actual database logic to fetch feeding records
-        return List.of(); // Example: Return an empty list
+        FeedingDataService service = new FeedingDataService();
+        return service.getAllFeedingRecords(null, LocalDateTime.of(1,1,1,0,0)); // Default values
+    }
+    public void handleExportButtonClick() {
+        CsvExportService csvExportService = new CsvExportService();
+
+        // Fetch data from dbo.pig and dbo.feeding
+        List<Pig> pigs = fetchPigs();
+        List<FeedingRecord> feedingRecords = fetchFeedingRecords();
+
+        if (pigs.isEmpty() && feedingRecords.isEmpty()) {
+            System.err.println("No data to export.");
+            return;
+        }
+        String filePath = "C:/Dokumenter/Exports/pig_feeding_data.xlsx";
+        filePath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/Dokumenter/Exports/pig_feeding_data.xlsx";
+        boolean sucess = csvExportService.exportToExcel(pigs, feedingRecords, filePath);
+
+        if (sucess) {
+            System.out.println("Export successful: " + filePath);
+        } else {
+            System.err.println("Export failed.");
+        }
+
     }
 }

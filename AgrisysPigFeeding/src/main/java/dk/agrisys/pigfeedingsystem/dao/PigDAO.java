@@ -16,8 +16,32 @@ public class PigDAO {
 
 
     public List<Pig> getAllPigs() {
-        System.out.println("DAO: Henter alle grise (MOCK)");
-        return new ArrayList<>(pigs); // Returner kopi for at undgå ekstern ændring
+        List<Pig> pigs = new ArrayList<>();
+        String query = "SELECT PigID, Number, Location, FCR, StartWeight, EndWeight, WeightGain, FeedIntake, TestDays, Duration FROM Pig";
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Pig pig = new Pig(
+                        rs.getInt("Location"),
+                        String.valueOf(rs.getLong("PigID")),
+                        rs.getFloat("FCR"),
+                        rs.getFloat("StartWeight"),
+                        rs.getFloat("FeedIntake"),
+                        rs.getFloat("WeightGain"),
+                        rs.getFloat("EndWeight"),
+                        rs.getInt("TestDays")
+                );
+                pigs.add(pig);
+            }
+            System.out.println("DAO: Retrieved " + pigs.size() + " pigs from the database.");
+        } catch (SQLException e) {
+            System.err.println("DAO: Error fetching pigs from the database: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return pigs;
     }
 
     // Check if a pig is valid from db

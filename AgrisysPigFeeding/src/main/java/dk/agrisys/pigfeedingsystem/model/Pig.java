@@ -3,7 +3,6 @@ package dk.agrisys.pigfeedingsystem.model;
 // (Hvem har skrevet: [Dit Navn/Gruppens Navn])
 public class Pig {
     private String tagNumber;
-
     private int id;
     private int Number;
     private int Location;

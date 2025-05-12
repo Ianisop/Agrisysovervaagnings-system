@@ -11,85 +11,83 @@ import java.util.List;
 
 public class CsvExportService {
 
-    /**
-     * Exports a list of Pig and FeedingRecord objects to an Excel file with two sheets.
-     *
-     * @param pigs           The list of Pig objects to export.
-     * @param feedingRecords The list of FeedingRecord objects to export.
-     * @param filePath       The file path to write to.
-     * @return true if the export was successful, false otherwise.
-     */
     public boolean exportToExcel(List<Pig> pigs, List<FeedingRecord> feedingRecords, String filePath) {
-        if (pigs == null || feedingRecords == null || filePath == null || filePath.isEmpty()) {
-            System.err.println("Service: Excel Export - Data or file path must not be null or empty.");
+        if (pigs.isEmpty() && feedingRecords.isEmpty()) {
+            System.err.println("Service: No data to export.");
             return false;
         }
 
+        System.out.println("Service: Exporting " + pigs.size() + " pigs and " + feedingRecords.size() + " feeding records to Excel.");
+
         try (Workbook workbook = new XSSFWorkbook()) {
-            // Create Pig sheet
+            // Create sheets
             Sheet pigSheet = workbook.createSheet("Pigs");
-            createPigSheet(pigSheet, pigs);
+            Sheet feedingSheet = workbook.createSheet("Feeding Records");
 
-            // Create FeedingRecords sheet
-            Sheet feedingSheet = workbook.createSheet("FeedingRecords");
-            createFeedingRecordSheet(feedingSheet, feedingRecords);
+            // Add headers for pigs
+            Row pigHeaderRow = pigSheet.createRow(0);
+            pigHeaderRow.createCell(0).setCellValue("Pig ID");
+            pigHeaderRow.createCell(1).setCellValue("Location");
+            pigHeaderRow.createCell(2).setCellValue("FCR");
+            pigHeaderRow.createCell(3).setCellValue("Start Weight");
+            pigHeaderRow.createCell(4).setCellValue("End Weight");
+            pigHeaderRow.createCell(5).setCellValue("Weight Gain");
+            pigHeaderRow.createCell(6).setCellValue("Feed Intake");
+            pigHeaderRow.createCell(7).setCellValue("Test Days");
 
-            // Write to file
-            try (FileOutputStream fileOut = new FileOutputStream(filePath)) {
-                workbook.write(fileOut);
+            // Write pig data
+            DataFormat format = workbook.createDataFormat();
+            CellStyle numberStyle = workbook.createCellStyle();
+            numberStyle.setDataFormat(format.getFormat("0")); // Prevent scientific notation
+
+            int pigRowIndex = 1;
+            for (Pig pig : pigs) {
+                Row row = pigSheet.createRow(pigRowIndex++);
+                Cell pigIdCell = row.createCell(0);
+                pigIdCell.setCellValue(pig.getTagNumber());
+                pigIdCell.setCellStyle(numberStyle); // Apply number style
+                row.createCell(1).setCellValue(pig.getLocation());
+                row.createCell(2).setCellValue(pig.getFCR());
+                row.createCell(3).setCellValue(pig.getStartWeight());
+                row.createCell(4).setCellValue(pig.getEndWeight());
+                row.createCell(5).setCellValue(pig.getWeightGain());
+                row.createCell(6).setCellValue(pig.getFeedIntake());
+                row.createCell(7).setCellValue(pig.getTestDays());
             }
 
-            System.out.println("Service: Excel Export to '" + filePath + "' successful.");
+            // Add headers for feeding records
+            Row feedingHeaderRow = feedingSheet.createRow(0);
+            feedingHeaderRow.createCell(0).setCellValue("Pig ID");
+            feedingHeaderRow.createCell(1).setCellValue("Location");
+            feedingHeaderRow.createCell(2).setCellValue("Amount (grams)");
+            feedingHeaderRow.createCell(3).setCellValue("Timestamp");
+            feedingHeaderRow.createCell(4).setCellValue("Duration");
+
+            // Write feeding record data
+            int feedingRowIndex = 1;
+            for (FeedingRecord record : feedingRecords) {
+                Row row = feedingSheet.createRow(feedingRowIndex++);
+                Cell pigIdCell = row.createCell(0);
+                pigIdCell.setCellValue(record.getPigId().toString());
+                pigIdCell.setCellStyle(numberStyle); // Apply number style
+                row.createCell(1).setCellValue(record.getLocation());
+                row.createCell(2).setCellValue(record.getAmountInGrams());
+                row.createCell(3).setCellValue(record.getTimestamp().toString());
+                row.createCell(4).setCellValue(record.getDuration().toString());
+            }
+
+            // Write to file
+            try (FileOutputStream fos = new FileOutputStream(filePath)) {
+                workbook.write(fos);
+            }
+
+            System.out.println("Service: Data exported successfully to " + filePath);
             return true;
 
         } catch (IOException e) {
-            System.err.println("Service: Error writing to Excel file '" + filePath + "': " + e.getMessage());
+            System.err.println("Service: Error exporting data to Excel: " + e.getMessage());
             e.printStackTrace();
             return false;
-        }
-    }
-
-    private void createPigSheet(Sheet sheet, List<Pig> pigs) {
-        Row headerRow = sheet.createRow(0);
-        String[] headers = {"PigID", "Number", "Location", "FCR", "StartWeight", "EndWeight", "WeightGain", "FeedIntake", "TestDays", "Duration"};
-        for (int i = 0; i < headers.length; i++) {
-            Cell cell = headerRow.createCell(i);
-            cell.setCellValue(headers[i]);
-        }
-
-        int rowNum = 1;
-        for (Pig pig : pigs) {
-            Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(pig.getId());
-            row.createCell(1).setCellValue(pig.getNumber());
-            row.createCell(2).setCellValue(pig.getLocation());
-            row.createCell(3).setCellValue(pig.getFCR());
-            row.createCell(4).setCellValue(pig.getStartWeight());
-            row.createCell(5).setCellValue(pig.getEndWeight());
-            row.createCell(6).setCellValue(pig.getWeightGain());
-            row.createCell(7).setCellValue(pig.getFeedIntake());
-            row.createCell(8).setCellValue(pig.getTestDays());
-            row.createCell(9).setCellValue(pig.getDuration());
-        }
-    }
-
-    private void createFeedingRecordSheet(Sheet sheet, List<FeedingRecord> feedingRecords) {
-        Row headerRow = sheet.createRow(0);
-        String[] headers = {"FeedingID", "FeedingLocation", "PigID", "Date", "Duration", "FeedAmountGrams"};
-        for (int i = 0; i < headers.length; i++) {
-            Cell cell = headerRow.createCell(i);
-            cell.setCellValue(headers[i]);
-        }
-
-        int rowNum = 1;
-        for (FeedingRecord record : feedingRecords) {
-            Row row = sheet.createRow(rowNum++);
-            row.createCell(0).setCellValue(record.getId());
-            row.createCell(1).setCellValue(record.getLocation());
-            row.createCell(2).setCellValue(record.getPigId());
-            row.createCell(3).setCellValue(record.getTimestamp() != null ? record.getTimestamp().toString() : "");
-            row.createCell(4).setCellValue(record.getDuration() != null ? record.getDuration().toString() : "");
-            row.createCell(5).setCellValue(record.getAmountInGrams());
         }
     }
 }

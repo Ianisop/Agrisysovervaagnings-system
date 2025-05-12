@@ -2,6 +2,7 @@ package dk.agrisys.pigfeedingsystem.dao;
 
 import dk.agrisys.pigfeedingsystem.model.FeedingRecord;
 import dk.agrisys.pigfeedingsystem.model.Pig;
+import dk.agrisys.pigfeedingsystem.service.FeedingDataService;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -12,74 +13,53 @@ import java.util.Set;
 public class FeedingRecordDAO {
 
     private PigDAO pigData = new PigDAO();
-    public List<FeedingRecord> getAllFeedingRecords() {
-        List<FeedingRecord> records = new ArrayList<>();
-        String query = "SELECT * FROM Feeding";
 
-        try (Connection conn = DatabaseConnector.getConnection()) {
-            if (conn == null) {
-                System.err.println("DAO: Database connection is null.");
-                return records;
-            }
-            try (PreparedStatement stmt = conn.prepareStatement(query);
-                 ResultSet rs = stmt.executeQuery()) {
-
-                while (rs.next()) {
-                    records.add(mapResultSetToFeedingRecord(rs));
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("DAO: Error fetching all feeding records: " + e.getMessage());
-        }
-        return records;
-    }
-
-    public List<FeedingRecord> getFeedingsForPig(int pigId) {
-        List<FeedingRecord> records = new ArrayList<>();
-        String query = "SELECT * FROM Feeding WHERE PigID = ?";
-
-        try (Connection conn = DatabaseConnector.getConnection()) {
-            if (conn == null) {
-                System.err.println("DAO: Database connection is null.");
-                return records;
-            }
-            try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                stmt.setInt(1, pigId);
-                try (ResultSet rs = stmt.executeQuery()) {
-                    while (rs.next()) {
-                        records.add(mapResultSetToFeedingRecord(rs));
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            System.err.println("DAO: Error fetching feeding records for PigID " + pigId + ": " + e.getMessage());
-        }
-        return records;
-    }
 
     public List<FeedingRecord> getRecentFeedingsForPig(String pigId, LocalDateTime since) {
-        List<FeedingRecord> records = new ArrayList<>();
-        String query = "SELECT * FROM Feeding WHERE PigID = ? AND Date > ?";
+        List<FeedingRecord> feedingRecords = new ArrayList<>();
+        String query = "SELECT FeedingID, FeedingLocation, PigID, [Date], Duration, FeedAmountGrams " +
+                "FROM Feeding " +
+                "WHERE (? IS NULL OR PigID = ?) AND (? IS NULL OR [Date] >= ?)";
 
-        try (Connection conn = DatabaseConnector.getConnection()) {
-            if (conn == null) {
-                System.err.println("DAO: Database connection is null.");
-                return records;
-            }
-            try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                stmt.setString(1, pigId);
-                stmt.setTimestamp(2, Timestamp.valueOf(since));
-                try (ResultSet rs = stmt.executeQuery()) {
-                    while (rs.next()) {
-                        records.add(mapResultSetToFeedingRecord(rs));
-                    }
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setObject(1, pigId);
+            ps.setObject(2, pigId);
+            ps.setObject(3, since);
+            ps.setObject(4, since);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    FeedingRecord record = new FeedingRecord(
+                            rs.getString("FeedingLocation"),
+                            rs.getLong("PigID"),
+                            rs.getTimestamp("Date").toLocalDateTime(),
+                            rs.getTimestamp("Duration").toLocalDateTime(),
+                            rs.getDouble("FeedAmountGrams")
+                    );
+                    feedingRecords.add(record);
                 }
             }
         } catch (SQLException e) {
-            System.err.println("DAO: Error fetching recent feeding records for PigID " + pigId + ": " + e.getMessage());
+            System.err.println("Error fetching feeding records: " + e.getMessage());
+            e.printStackTrace();
         }
-        return records;
+
+        return feedingRecords;
     }
+
+
+    private List<FeedingRecord> fetchFeedingRecords() {
+        FeedingDataService service = new FeedingDataService();
+        List<FeedingRecord> feedingRecords = service.getAllFeedingRecords(null, LocalDateTime.of(1, 1, 1, 0, 0));
+        System.out.println("DEBUG: Fetched " + feedingRecords.size() + " feeding records.");
+        for (FeedingRecord record : feedingRecords) {
+            System.out.println("DEBUG: FeedingRecord - PigID: " + record.getPigId() + ", Amount: " + record.getAmountInGrams());
+        }
+        return service.getAllFeedingRecords(null, LocalDateTime.of(1, 1, 1, 0, 0));
+    }
+
     public boolean batchInsertFeedingRecords(List<FeedingRecord> records) {
         String sql = "INSERT INTO Feeding (FeedingLocation, PigID, Date, Duration, FeedAmountGrams) VALUES (CAST(? AS INT), ?, ?, ?, ?)";
 
@@ -183,7 +163,7 @@ public class FeedingRecordDAO {
 
     private FeedingRecord mapResultSetToFeedingRecord(ResultSet rs) throws SQLException {
         return new FeedingRecord(
-            String.valueOf(rs.getInt("ID")), // Convert int to String for location
+            String.valueOf(rs.getInt("FeedingLocation")), // Convert int to String for location
             rs.getLong("PigID"),
             rs.getTimestamp("Date").toLocalDateTime(),
             rs.getTimestamp("Duration").toLocalDateTime(),

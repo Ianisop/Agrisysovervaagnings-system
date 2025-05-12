@@ -1,70 +1,66 @@
 package dk.agrisys.pigfeedingsystem.controller;
 
-import dk.App;
-import dk.agrisys.pigfeedingsystem.Generator;
 import dk.agrisys.pigfeedingsystem.SessionContext;
 import dk.agrisys.pigfeedingsystem.dao.InviteCodeDAO;
-import dk.agrisys.pigfeedingsystem.dao.UserDAO;
 import dk.agrisys.pigfeedingsystem.model.FeedingRecord;
 import dk.agrisys.pigfeedingsystem.model.Pig;
 import dk.agrisys.pigfeedingsystem.model.User;
 import dk.agrisys.pigfeedingsystem.model.UserRole;
-import dk.agrisys.pigfeedingsystem.service.*;
+import dk.agrisys.pigfeedingsystem.service.CsvExportService;
+import dk.agrisys.pigfeedingsystem.service.ExcelImportService;
 import dk.util.IController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
+import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.text.TextFlow;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.List;
 
-// (Hvem har skrevet: [Dit Navn/Gruppens Navn])
 public class MainDashboardController implements IController {
-    @FXML // fx:id="adminTab"
-    private Tab adminTab; // Value injected by FXMLLoader
 
-    @FXML // fx:id="dataTab"
-    private Tab dataTab; // Value injected by FXMLLoader
+    @FXML
+    private Tab adminTab;
 
-    @FXML // fx:id="dataTextLog"
-    private TextFlow dataTextLog; // Value injected by FXMLLoader
+    @FXML
+    private Tab dataTab;
 
-    @FXML // fx:id="exportCSV"
-    private Button exportCSV; // Value injected by FXMLLoader
+    @FXML
+    private TextFlow dataTextLog;
 
-    @FXML // fx:id="exportXLSX"
-    private Button exportXLSX; // Value injected by FXMLLoader
-    @FXML // fx:id="inviteCodeTextDisplay"
-    private Text inviteCodeTextDisplay; // Value injected by FXMLLoader
+    @FXML
+    private Button exportCSV;
 
-    @FXML // fx:id="generateAdminInvite"
-    private Button generateAdminInvite; // Value injected by FXMLLoader
+    @FXML
+    private Button exportXLSX;
 
-    @FXML // fx:id="generateInvite"
-    private Button generateInvite; // Value injected by FXMLLoader
+    @FXML
+    private Text inviteCodeTextDisplay;
 
-    @FXML // fx:id="importCSV"
-    private Button importCSV; // Value injected by FXMLLoader
+    @FXML
+    private Button generateAdminInvite;
 
-    @FXML // fx:id="importXLSX"
-    private Button importXLSX; // Value injected by FXMLLoader
+    @FXML
+    private Button generateInvite;
 
-    @FXML // fx:id="kpiTab"
-    private Tab kpiTab; // Value injected by FXMLLoader
+    @FXML
+    private Button importCSV;
+
+    @FXML
+    private Button importXLSX;
+
+    @FXML
+    private Tab kpiTab;
 
     private Stage primaryStage;
-
-
 
     public void setPrimaryStage(Stage stage) {
         this.primaryStage = stage;
@@ -72,44 +68,30 @@ public class MainDashboardController implements IController {
 
     @FXML
     private void initialize() {
-        UserService userService = new UserService();
-        UserDAO userDAO = userService.getDAO();
         User user = SessionContext.getCurrentUser();
-        System.out.println("GETTING USER: " + user);
-        if(user == null) return; // return if user doesnt exist
+        if (user == null) return;
+
         UserRole userRole = user.getRole();
-        System.out.println("USER ROLE IS: " + userRole);
-        //UserRole userRole = UserRole.USER;
-        if(userRole == null) return;
+        if (userRole == null) return;
 
-
-        if(userRole == UserRole.SUPERUSER) {
-            adminTab.setDisable(false); // check if its an admin
-
-        }
-        else{
-            adminTab.setDisable(true); // check if its an admin
+        if (userRole == UserRole.SUPERUSER) {
+            adminTab.setDisable(false);
+        } else {
+            adminTab.setDisable(true);
             adminTab.getContent().setStyle("-fx-background-color: grey;");
         }
-
-
     }
 
-    //Method to import data into the db using an excel file on click
-    public void importXLSX(ActionEvent e)
-    {
+    public void importXLSX(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
         ExcelImportService eis = new ExcelImportService();
-        // filter out xlsx files
-        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Excel Spreadsheets", "*.xlsx"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel Spreadsheets", "*.xlsx"));
         File selectedFile = fileChooser.showOpenDialog(primaryStage);
-        if(selectedFile != null)  eis.importFromExcel(selectedFile); // import from Excel if the user chooses a file
-
+        if (selectedFile != null) eis.importFromExcel(selectedFile);
     }
 
-
-    public void generateUserInvite(ActionEvent e)  {
-        String code = Generator.generate(16);
+    public void generateUserInvite(ActionEvent e) {
+        String code = dk.agrisys.pigfeedingsystem.Generator.generate(16);
         InviteCodeDAO inviteCodeDAO = new InviteCodeDAO();
         try {
             inviteCodeDAO.saveCodeToDb(code, false);
@@ -119,26 +101,49 @@ public class MainDashboardController implements IController {
         inviteCodeTextDisplay.setText(code);
     }
 
-    public void generateAdminInvite(ActionEvent e)
-    {
-        String code = Generator.generate(16);
+    public void generateAdminInvite(ActionEvent e) {
+        String code = dk.agrisys.pigfeedingsystem.Generator.generate(16);
         InviteCodeDAO inviteCodeDAO = new InviteCodeDAO();
         try {
             inviteCodeDAO.saveCodeToDb(code, true);
         } catch (SQLException ex) {
             throw new RuntimeException(ex);
         }
-
         inviteCodeTextDisplay.setText(code);
     }
 
+   public void handleExportButtonClick(ActionEvent event) {
+          CsvExportService csvExportService = new CsvExportService();
 
+          // Fetch data from dbo.pig and dbo.feeding
+          List<Pig> pigs = fetchPigs();
+          List<FeedingRecord> feedingRecords = fetchFeedingRecords();
 
+          // Predefined file path - ændret til .csv extension
+       String filePath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/Exports/pig_feeding_data.csv";
 
+          File file = new File(filePath);
+          if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
+                System.err.println("Error: Failed to create export directory.");
+                return;
+          }
 
+       boolean success = csvExportService.exportToExcel(pigs, feedingRecords, filePath);
+       if (success) {
+           System.out.println("Export successful: " + filePath);
+       } else {
+           System.err.println("Export failed.");
+       }
 
+      }
 
+    private List<Pig> fetchPigs() {
+        // Replace with actual database logic to fetch pigs
+        return List.of(); // Example: Return an empty list
+    }
 
-
-
+    private List<FeedingRecord> fetchFeedingRecords() {
+        // Replace with actual database logic to fetch feeding records
+        return List.of(); // Example: Return an empty list
+    }
 }

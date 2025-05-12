@@ -93,7 +93,7 @@ public class ExcelImportService {
                         continue;
                     }
 
-                    FeedingRecord record = new FeedingRecord(location, pigId, timestamp, duration, amount);
+                    FeedingRecord record = new FeedingRecord(String.valueOf(location), pigId, timestamp, duration, amount);
                     recordsToSave.add(record);
                     processedDataRows++;
                 }

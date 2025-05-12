@@ -81,7 +81,7 @@ public class FeedingRecordDAO {
         return records;
     }
     public boolean batchInsertFeedingRecords(List<FeedingRecord> records) {
-        String sql = "INSERT INTO Feeding (FeedingLocation, PigID, Date, Duration, FeedAmountGrams) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Feeding (FeedingLocation, PigID, Date, Duration, FeedAmountGrams) VALUES (CAST(? AS INT), ?, ?, ?, ?)";
 
         // Fetch all existing PigIDs from DB
         Set<Long> existingPigs = pigData.getAllPigIds();
@@ -112,7 +112,7 @@ public class FeedingRecordDAO {
             int count = 0;
 
             for (FeedingRecord record : records) {
-                ps.setInt(1, record.getLocation());
+                ps.setString(1, record.getLocation());
                 ps.setLong(2, record.getPigId());
                 ps.setTimestamp(3, Timestamp.valueOf(record.getTimestamp()));
                 ps.setTimestamp(4, Timestamp.valueOf(record.getDuration()));
@@ -180,11 +180,11 @@ public class FeedingRecordDAO {
 
     private FeedingRecord mapResultSetToFeedingRecord(ResultSet rs) throws SQLException {
         return new FeedingRecord(
-                rs.getInt("ID"),
-                rs.getLong("PigID"),
-                rs.getTimestamp("Date").toLocalDateTime(),
-                rs.getTimestamp("Duration").toLocalDateTime(),
-                rs.getDouble("FeedAmountGrams")
+            String.valueOf(rs.getInt("ID")), // Convert int to String for location
+            rs.getLong("PigID"),
+            rs.getTimestamp("Date").toLocalDateTime(),
+            rs.getTimestamp("Duration").toLocalDateTime(),
+            rs.getDouble("FeedAmountGrams")
         );
     }
 }

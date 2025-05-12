@@ -40,7 +40,7 @@ public class PigDAO {
         if (pigs == null || pigs.isEmpty()) return true;
 
         String sql = "INSERT INTO Pig (PigID, Number, Location, FCR, StartWeight, EndWeight, WeightGain, FeedIntake, TestDays, Duration) " +
-                "VALUES (?, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         // Fetch all existing PigIDs from DB
         Set<Long> existingPigs = getAllPigIds();
 
@@ -55,8 +55,18 @@ public class PigDAO {
 
                 if (!existingPigs.contains(pigId)) {
                     ps.setLong(1, pigId);
+                    ps.setInt(2, pig.getNumber());
+                    ps.setInt(3, pig.getLocation());
+                    ps.setFloat(4, pig.getFCR());
+                    ps.setFloat(5, pig.getStartWeight());
+                    ps.setFloat(6, pig.getEndWeight());
+                    ps.setFloat(7, pig.getWeightGain());
+                    ps.setFloat(8, pig.getFeedIntake());
+                    ps.setInt(9, pig.getTestDays());
+                    ps.setFloat(10, pig.getDuration());
                     ps.addBatch();
-                    existingPigs.add(pigId); // cache the pig : solves everything
+                    existingPigs.add(pigId);
+                    System.out.println(pigId);// cache the pig : solves everything
                 }
             }
 
@@ -92,7 +102,7 @@ public class PigDAO {
 
     public boolean savePig(Pig pig) {
         String query = "INSERT INTO Pig(PigID, Number, Location, FCR, StartWeight, EndWeight, WeightGain, FeedIntake, TestDays, Duration) " +
-                "VALUES (?, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         if (getPig(Long.parseLong(pig.getTagNumber()))) {
             System.out.println("DAO: Pig with ID " + pig.getTagNumber() + " already exists.");

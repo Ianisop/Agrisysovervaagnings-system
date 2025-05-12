@@ -53,7 +53,7 @@
                               <Button fx:id="importXLSX" layoutX="14.0" layoutY="131.0" mnemonicParsing="false" onAction="#importXLSX" style="-fx-background-color: darkgreen;" text="IMPORT XLSX" />
                               <Button fx:id="importCSV" layoutX="14.0" layoutY="171.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: darkgreen;" text="IMPORT CSV" />
                               <Button fx:id="exportXLSX" layoutX="487.0" layoutY="131.0" mnemonicParsing="false" style="-fx-background-color: darkgreen;" text="EXPORT XLSX" />
-                              <Button fx:id="exportCSV" layoutX="487.0" layoutY="171.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: darkgreen;" text="EXPORT CSV" />
+                              <Button fx:id="exportCSV" layoutX="487.0" layoutY="171.0" mnemonicParsing="false" onAction="#handleExportButtonClick" prefHeight="30.0" prefWidth="99.0" style="-fx-background-color: darkgreen;" text="EXPORT CSV" />
                               <TextFlow fx:id="dataTextLog" layoutX="132.0" layoutY="18.0" prefHeight="305.0" prefWidth="332.0" />
                            </children>
                         </AnchorPane>

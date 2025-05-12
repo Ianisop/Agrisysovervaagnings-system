@@ -1,45 +1,67 @@
 package dk.agrisys.pigfeedingsystem.model;
 
 import java.time.LocalDateTime;
-import java.time.LocalDate;
-import java.time.temporal.TemporalAccessor;
 
 public class FeedingRecord {
-    private final int location;
-    private final LocalDateTime duration;
-    private final double amountInGrams;
+    private String location; // Location of the feeding
+    private LocalDateTime duration;
+    private double amountInGrams;
     private Long pigId;
     private LocalDateTime timestamp;
+    private int id;
 
-    public FeedingRecord(int location, Long pigId, LocalDateTime timestamp, LocalDateTime duration, double amountInGrams) {
+    // Constructor
+    public FeedingRecord(String location, Long pigId, LocalDateTime timestamp, LocalDateTime duration, double amountInGrams) {
         this.location = location;
         this.pigId = pigId;
         this.timestamp = timestamp;
         this.duration = duration;
         this.amountInGrams = amountInGrams;
-
     }
 
-    public int getLocation() { return location; }
-    public Long getPigId() { return pigId; }
-    public LocalDateTime getTimestamp() { return timestamp; }
-    public double getAmountInGrams() { return amountInGrams; }
-
-
-    public void setPigId(Long pigId) {
-
+    // Getters
+    public int getId() {
+        return id;
     }
 
-    public void setDate(String date) {
+    public String getLocation() {
+        return location;
     }
 
-    public void setAmountKg(Double amount) {
+    public Long getPigId() {
+        return pigId;
     }
 
-    public void setId(int i) {
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 
     public LocalDateTime getDuration() {
         return duration;
+    }
+
+    public double getAmountInGrams() {
+        return amountInGrams;
+    }
+
+    // Setters
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setPigId(Long pigId) {
+        this.pigId = pigId;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setAmountInGrams(double amountInGrams) {
+        this.amountInGrams = amountInGrams;
     }
 }

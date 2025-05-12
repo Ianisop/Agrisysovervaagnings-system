@@ -65,8 +65,8 @@ public class PigDAO {
                     ps.setInt(9, pig.getTestDays());
                     ps.setFloat(10, pig.getDuration());
                     ps.addBatch();
-                    existingPigs.add(pigId);
-                    System.out.println(pigId);// cache the pig : solves everything
+                    existingPigs.add(pigId);// cache the pig : solves everything
+                   // System.out.println(pigId);
                 }
             }
 

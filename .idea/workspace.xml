@@ -5,18 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="74d7d523-6634-4feb-b5f6-d85e465b785c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/controller/MainDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/controller/MainDashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/DatabaseConnector.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/FeedingRecordDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/FeedingRecordDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/PigDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/dao/PigDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/model/FeedingRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/model/FeedingRecord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/model/Pig.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/model/Pig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/CsvExportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/CsvExportService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/ExcelImportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/ExcelImportService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/FeedingDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/java/dk/agrisys/pigfeedingsystem/service/FeedingDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/resources/view/MainDashboardView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/AgrisysPigFeeding/src/main/resources/view/MainDashboardView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

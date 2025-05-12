@@ -67,6 +67,18 @@ public class Pig {
 
         this.tagNumber = tagNumber;
     }
+    public Pig(Integer location, String tagNumber, Float fcr, Float startWeight, Float totalFeedIntake, Float weightGain, Float endWeight, Integer completedDays) {
+
+        this.Location = location;
+        this.tagNumber = tagNumber;
+        this.FCR = fcr;
+        this.StartWeight = startWeight;
+        this.FeedIntake = totalFeedIntake;
+        this.WeightGain = weightGain;
+        this.EndWeight = endWeight;
+        this.TestDays = completedDays;
+
+    }
 
     public String getTagNumber() { return tagNumber; }
 

@@ -1,9 +1,11 @@
 package dk.agrisys.pigfeedingsystem.service;
 
+import dk.agrisys.pigfeedingsystem.dao.PigDAO;
 import dk.agrisys.pigfeedingsystem.model.FeedingRecord;
 import dk.agrisys.pigfeedingsystem.dao.FeedingRecordDAO;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import dk.agrisys.pigfeedingsystem.model.Pig;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -45,6 +47,7 @@ public class ExcelImportService {
 
             System.out.println("INFO: Starting Excel import from file: " + file.getName());
 
+            List<Pig> pigsToSave = new ArrayList<>();
             List<FeedingRecord> recordsToSave = new ArrayList<>();
             boolean importHasErrors = false;
             int rowNum = 0;
@@ -53,6 +56,72 @@ public class ExcelImportService {
             try (FileInputStream fis = new FileInputStream(file);
                  Workbook workbook = new XSSFWorkbook(fis)) {
 
+                Sheet sheet = workbook.getSheetAt(0); // TODO: make sheet selection dynamic
+                if (sheet == null) {
+                    System.err.println("Excel Import Error - Sheet 1 not found in file: " + file.getName());
+                    return;
+                }
+
+                boolean skipHeader = true;
+
+                for (Row row : sheet) {
+                    rowNum++;
+                    if (skipHeader) {
+                        System.out.println("DEBUG: Skipping header row (Row " + rowNum + ")");
+                        skipHeader = false;
+                        continue;
+                    }
+
+                    if (isRowEmpty(row)) {
+                        System.out.println("DEBUG: Skipping empty row " + rowNum);
+                        continue;
+                    }
+
+                    final int LOCATION_COL = 0;   // Column B
+                    final int PIG_ID_COL = 2;     // Column C
+                    final int FCR_COL = 4;  // Column E
+                    final int START_WEIGHT_COL = 5;   // Column F
+                    final int TOTAL_FEED_INTAKE_COL = 6;     // Column G
+                    final int WEIGHT_GAIN_COL = 7;     // Column H
+                    final int END_WEIGHT_COL = 8;     // Column I
+                    final int COMPLETED_DAYS_COL = 9;     // Column J
+
+                    Integer location = readIntegerCell(row.getCell(LOCATION_COL), rowNum, LOCATION_COL + 1);
+                    Long pigId = readLongCell(row.getCell(PIG_ID_COL), rowNum, PIG_ID_COL + 1);
+                    Float FCR = readFloatCell(row.getCell(FCR_COL),rowNum,FCR_COL + 1);
+                    Float startWeight = readFloatCell(row.getCell(START_WEIGHT_COL), rowNum,START_WEIGHT_COL +1);
+                    Float totalFeedIntake = readFloatCell(row.getCell(TOTAL_FEED_INTAKE_COL),rowNum, TOTAL_FEED_INTAKE_COL+1);
+                    Float weightGain = readFloatCell(row.getCell(WEIGHT_GAIN_COL), rowNum, WEIGHT_GAIN_COL+1);
+                    Float endWeight = readFloatCell(row.getCell(END_WEIGHT_COL),rowNum,END_WEIGHT_COL+1);
+                    Integer completedDays = readIntegerCell(row.getCell(COMPLETED_DAYS_COL), rowNum, COMPLETED_DAYS_COL+1);
+
+
+
+                    Pig record = new Pig(location,String.valueOf(pigId),FCR,startWeight,totalFeedIntake,weightGain,endWeight,completedDays);
+                    pigsToSave.add(record);
+                    processedDataRows++;
+                }
+
+                System.out.printf("INFO: Parsed %d valid records from Excel. Attempting to save...%n", pigsToSave.size());
+
+
+                if (importHasErrors) {
+                    System.err.println("ERROR: Excel Import completed with errors.");
+                } else {
+                    System.out.println("INFO: Excel Import completed successfully.");
+                }
+
+            } catch (IOException e) {
+                System.err.println("ERROR: IO Error reading Excel file " + file.getName() + ": " + e.getMessage());
+                e.printStackTrace();
+            } catch (Exception e) {
+                System.err.println("ERROR: Unexpected error during Excel import from " + file.getName() + ": " + e.getMessage());
+                e.printStackTrace();
+            }
+
+            try (FileInputStream fis = new FileInputStream(file);
+                 Workbook workbook = new XSSFWorkbook(fis)) {
+                processedDataRows = 0;
                 Sheet sheet = workbook.getSheetAt(1); // TODO: make sheet selection dynamic
                 if (sheet == null) {
                     System.err.println("Excel Import Error - Sheet 1 not found in file: " + file.getName());
@@ -100,7 +169,9 @@ public class ExcelImportService {
 
                 System.out.printf("INFO: Parsed %d valid records from Excel. Attempting to save...%n", recordsToSave.size());
 
-                feedingRecordDAO.batchInsertFeedingRecords(recordsToSave); // batch save
+                PigDAO pigDao = new PigDAO();
+                pigDao.batchSavePigs(pigsToSave); // save pigs first
+                feedingRecordDAO.batchInsertFeedingRecords(recordsToSave); // batch save feedings records
 
 
                 if (importHasErrors) {

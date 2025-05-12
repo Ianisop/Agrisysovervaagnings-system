@@ -86,6 +86,9 @@ public class FeedingRecordDAO {
         // Fetch all existing PigIDs from DB
         Set<Long> existingPigs = pigData.getAllPigIds();
 
+
+
+
         // Filter pigs that don't already exist in DB
         List<Pig> pigsToSave = records.stream()
                 .map(r -> new Pig(String.valueOf(r.getPigId())))

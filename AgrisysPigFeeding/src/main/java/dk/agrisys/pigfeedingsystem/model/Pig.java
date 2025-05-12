@@ -30,21 +30,21 @@ public class Pig {
 
 
     public float getFCR() {
-        return FCR;
+        return FCR != null ? FCR : 0.0f;
     }
 
 
-    public float getStartWeight() {
+    public Float getStartWeight() {
         return StartWeight;
     }
 
 
-    public float getWeightGain() {
+    public Float getWeightGain() {
         return WeightGain;
     }
 
 
-    public float getFeedIntake() {
+    public Float getFeedIntake() {
         return FeedIntake;
     }
 
@@ -53,13 +53,13 @@ public class Pig {
         return TestDays;
     }
 
-    public float getEndWeight() {
+    public Float getEndWeight() {
         return EndWeight;
     }
 
-   public float getDuration() {
-        return Duration;
-   }
+    public float getDuration() {
+        return Duration != null ? Duration : 0;
+    }
 
     // Tilføj flere felter som vægt, alder etc. senere
 

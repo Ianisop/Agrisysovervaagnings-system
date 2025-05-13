@@ -41,10 +41,6 @@ public class InviteCodeDAO {
         }catch(SQLException e) {
             System.out.println("DAO (DB): Failed to save invite code to database: " + e.getMessage());
         }
-        {
-
-        }
-
 
         return false;
     }
@@ -74,8 +70,6 @@ public class InviteCodeDAO {
             pstmt.setBoolean(2, true); // initial code is admin
             pstmt.setTimestamp(3, timestamp);
 
-
-
             int rowsAffected = pstmt.executeUpdate();
 
 
@@ -101,9 +95,6 @@ public class InviteCodeDAO {
             if(rs.next()){
                 return rs.getBoolean("isAdmin");
             }
-
-
-
 
             int rowsAffected = pstmt.executeUpdate();
 

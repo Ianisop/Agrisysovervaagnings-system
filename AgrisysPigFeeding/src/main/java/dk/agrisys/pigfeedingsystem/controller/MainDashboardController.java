@@ -20,6 +20,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.swing.filechooser.FileSystemView;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -58,6 +60,9 @@ public class MainDashboardController implements IController {
 
     @FXML
     private Button importXLSX;
+
+    @FXML
+    private Button copyCodeToClipboard;
 
     @FXML
     private Tab kpiTab;
@@ -139,6 +144,7 @@ public class MainDashboardController implements IController {
 
       }
 
+
     private List<Pig> fetchPigs() {
         FeedingDataService service = new FeedingDataService();
         return service.getAllPigs();
@@ -169,5 +175,14 @@ public class MainDashboardController implements IController {
             System.err.println("Export failed.");
         }
 
+    }
+
+    public void copyCodeToClipboard(ActionEvent e){
+        Toolkit.getDefaultToolkit()
+                .getSystemClipboard()
+                .setContents(
+                        new StringSelection(inviteCodeTextDisplay.getText()),
+                        null
+                );
     }
 }

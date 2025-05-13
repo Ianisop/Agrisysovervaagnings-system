@@ -70,6 +70,7 @@
                                     <Font size="20.0" />
                                  </font>
                               </Text>
+                              <Button fx:id="copyCodeToClipboard" layoutX="215.0" layoutY="66.0" mnemonicParsing="false" onAction="#copyCodeToClipboard" style="-fx-background-color: darkgreen;" text="COPY CODE TO CLIPBOARD" />
                            </children>
                         </AnchorPane>
                      </content>

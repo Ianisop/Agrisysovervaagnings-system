@@ -14,34 +14,11 @@ import java.util.Map;
 
 public class UserDAO {
 
-    // --- Mock In-Memory "Database" ---
-    private static final Map<String, User> mockUsers = new HashMap<>();
     private User user;
 
-    static {
-        mockUsers.put("super", new User("super", "pass1", UserRole.SUPERUSER, Generator.generate(8)));
-        mockUsers.put("user", new User("user", "pass2", UserRole.USER, Generator.generate(8)));
-        System.out.println("DAO: Mock users initialized (INSECURE).");
-    }
-
-    // Mock method to find a user by username
-    public User findUserByUsername(String username) {
-        return mockUsers.get(username);
-    }
-
-    // Mock method to create a user
-    public boolean createUser(String username, String password, UserRole role, int id) {
-        if (username == null || username.trim().isEmpty() || password == null || password.isEmpty() || role == null) {
-            System.err.println("DAO (Mock): Invalid input for createUser.");
-            return false;
-        }
 
 
-        User user = new User(username, password, role, Generator.generate(8));
-        return mockUsers.putIfAbsent(username, user) == null;
-    }
-
-    // === Method: Register a new user in the database ===
+    //Register a new user in the database
     public boolean registerUserInDb(String username, String plainPassword, UserRole role, int userID, String inviteCode) {
         if (username == null || username.trim().isEmpty() || plainPassword == null || plainPassword.isEmpty() || role == null || inviteCode == null || inviteCode.isEmpty()) {
             System.err.println("DAO (DB): Invalid input for registerUserInDb.");
@@ -161,21 +138,26 @@ public class UserDAO {
 
     public User getUser(String username)
     {
-        String sql = "SELECT RoleID FROM [User] WHERE Username = ?";
-        User user = null;
+        String sql = "SELECT Username FROM [User] WHERE Username = ?";
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, username);
             ResultSet rs = pstmt.executeQuery();
+            if(rs.next())
+            {
+                User user = new User(rs.getString(1),null,null,null);
+                System.out.println("FOUND USER BY NAME: " + username);
+                return user;
+            }
         } catch (SQLException e) {
-        System.err.println("DAO (DB): SQL error during login verification for '" + username + "': " + e.getMessage());
-        e.printStackTrace();
-
-        return user;
+            System.err.println("DAO (DB): SQL error during login verification for '" + username + "': " + e.getMessage());
+            e.printStackTrace();
+            return null;
         }
-        return user;
+        return null;
     }
+
     public boolean validateUserID(int id)
     {
         String sql = "SELECT * FROM [User] WHERE UserID = ?";

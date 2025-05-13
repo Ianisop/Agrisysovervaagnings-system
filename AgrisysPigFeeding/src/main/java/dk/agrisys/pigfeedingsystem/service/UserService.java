@@ -15,7 +15,8 @@ package dk.agrisys.pigfeedingsystem.service;
         }
 
         public boolean createUser(String username, String password, String inviteCode) {
-            if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+            if (username == null || username.isEmpty() || password == null || password.isEmpty() || userDao.getUser(username) != null) {
+                System.out.println("USER ALREADY EXISTS");
                 return false; // Validation failed
             }
 
@@ -23,7 +24,7 @@ package dk.agrisys.pigfeedingsystem.service;
             UserRole role = ico.getInviteCodeRoleType(inviteCode) ? UserRole.SUPERUSER : UserRole.USER;
 
 
-            User user = new User(username, password, role, Generator.generate(8));
+            //User user = new User(username, password, role, Generator.generate(8));
             return userDao.registerUserInDb(username, password, role, Integer.parseInt(Generator.generate(8)), inviteCode); // Save user via DAO
         }
 

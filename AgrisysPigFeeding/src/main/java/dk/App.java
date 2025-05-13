@@ -35,8 +35,8 @@ public class App extends Application {
         System.out.println("Database driver test completed.");
         InviteCodeDAO invCodeDao = new InviteCodeDAO();
         invCodeDao.createInitialCode();
-        invCodeDao.createInitialUser();
-        System.out.println("INITIAL CODE && USER CREATED!");
+        //invCodeDao.createInitialUser(); // --- not needed anymore
+        System.out.println("INITIAL CODE CREATED!");
         // Start with the login view
         loadScene("view/LoginView.fxml");
 

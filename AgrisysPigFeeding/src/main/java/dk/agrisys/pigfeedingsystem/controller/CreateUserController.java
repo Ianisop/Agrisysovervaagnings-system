@@ -1,5 +1,6 @@
 package dk.agrisys.pigfeedingsystem.controller;
 
+import dk.App;
 import dk.agrisys.pigfeedingsystem.model.UserRole;
 import dk.agrisys.pigfeedingsystem.service.UserService;
 import javafx.fxml.FXML;
@@ -53,6 +54,7 @@ public class CreateUserController {
             if (success) {
                 showStatus("User created successfully!", "green");
                 clearFields();
+                App.loadScene("view/LoginView.fxml");
             } else {
                 showStatus("Failed to create user (already exists?).", "red");
             }

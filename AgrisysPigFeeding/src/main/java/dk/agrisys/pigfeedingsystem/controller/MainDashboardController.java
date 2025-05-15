@@ -12,8 +12,12 @@ import dk.agrisys.pigfeedingsystem.service.FeedingDataService;
 import dk.util.IController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableView;
 import javafx.scene.text.TextFlow;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -36,6 +40,9 @@ public class MainDashboardController implements IController {
 
     @FXML
     private Tab dataTab;
+
+    @FXML
+    private Tab warningTab;
 
     @FXML
     private TextFlow dataTextLog;
@@ -119,30 +126,30 @@ public class MainDashboardController implements IController {
         inviteCodeTextDisplay.setText(code);
     }
 
-   public void handleExportButtonClick(ActionEvent event) {
-          CsvExportService csvExportService = new CsvExportService();
+    public void handleExportButtonClick(ActionEvent event) {
+        CsvExportService csvExportService = new CsvExportService();
 
-          // Fetch data from dbo.pig and dbo.feeding
-          List<Pig> pigs = fetchPigs();
-          List<FeedingRecord> feedingRecords = fetchFeedingRecords();
+        // Fetch data from dbo.pig and dbo.feeding
+        List<Pig> pigs = fetchPigs();
+        List<FeedingRecord> feedingRecords = fetchFeedingRecords();
 
-          // Predefined file path - ændret til .csv extension
-       String filePath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/Exports/pig_feeding_data.csv";
+        // Predefined file path - ændret til .csv extension
+        String filePath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/Exports/pig_feeding_data.csv";
 
-          File file = new File(filePath);
-          if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
-                System.err.println("Error: Failed to create export directory.");
-                return;
-          }
+        File file = new File(filePath);
+        if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
+            System.err.println("Error: Failed to create export directory.");
+            return;
+        }
 
-       boolean success = csvExportService.exportToExcel(pigs, feedingRecords, filePath);
-       if (success) {
-           System.out.println("Export successful: " + filePath);
-       } else {
-           System.err.println("Export failed.");
-       }
+        boolean success = csvExportService.exportToExcel(pigs, feedingRecords, filePath);
+        if (success) {
+            System.out.println("Export successful: " + filePath);
+        } else {
+            System.err.println("Export failed.");
+        }
 
-      }
+    }
 
 
     private List<Pig> fetchPigs() {
@@ -185,4 +192,7 @@ public class MainDashboardController implements IController {
                         null
                 );
     }
+
+    public TableView WarningListController;
+
 }

@@ -10,8 +10,8 @@ public class DatabaseConnector {
     // --- Database forbindelsesoplysninger (SQL SERVER EKSEMPEL) ---
     // SKAL hentes fra en sikker konfiguration!
     private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=Agrisys;encrypt=true;trustServerCertificate=true;"; // Erstat servernavn!
-    private static final String DB_USER = "admin"; // Erstat!
-    private static final String DB_PASSWORD = "1234"; // Erstat!
+    private static final String DB_USER = "Magnus"; // Erstat!
+    private static final String DB_PASSWORD = "Jpc77rfc"; // Erstat!
 
 
 

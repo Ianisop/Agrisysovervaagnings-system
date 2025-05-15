@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dk.agrisys.pigfeedingsystem.controller.WarningListController" spacing="10" alignment="CENTER">
+    <TableView fx:id="warningTable" prefWidth="800" prefHeight="400">
+        <columns>
+            <TableColumn fx:id="pigIdColumn" text="Pig ID" prefWidth="125" />
+            <TableColumn fx:id="warningTypeColumn" text="Advarsel" prefWidth="100" />
+            <TableColumn fx:id="BeskedColumn" text="Besked" prefWidth="200" />
+            <TableColumn fx:id="OprettedColumn" text="Opretted" prefWidth="100" />
+            <TableColumn fx:id="LøstColumn" text="Løst" prefWidth="50" />
+        </columns>
+    </TableView>
+</VBox>

@@ -10,11 +10,14 @@ import dk.agrisys.pigfeedingsystem.service.CsvExportService;
 import dk.agrisys.pigfeedingsystem.service.ExcelImportService;
 import dk.agrisys.pigfeedingsystem.service.FeedingDataService;
 import dk.util.IController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableView;
@@ -31,7 +34,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.TreeMap;
 
 public class MainDashboardController implements IController {
 
@@ -72,7 +79,15 @@ public class MainDashboardController implements IController {
     private Button copyCodeToClipboard;
 
     @FXML
-    private Tab kpiTab;
+    private PieChart pieChart;
+
+    @FXML
+    private LineChart<String, Number> lineChart;
+
+    @FXML
+    private StackedBarChart<String, Number> stackbarChart;
+
+    @FXML private Tab kpiTab;
 
     private Stage primaryStage;
 
@@ -94,6 +109,10 @@ public class MainDashboardController implements IController {
             adminTab.setDisable(true);
             adminTab.getContent().setStyle("-fx-background-color: grey;");
         }
+
+        populateLineChart();
+        populatePieChart();
+        populateStackedBarChart();
     }
 
     public void importXLSX(ActionEvent e) {
@@ -172,8 +191,7 @@ public class MainDashboardController implements IController {
             System.err.println("No data to export.");
             return;
         }
-        String filePath = "C:/Dokumenter/Exports/pig_feeding_data.xlsx";
-        filePath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/Dokumenter/Exports/pig_feeding_data.xlsx";
+        String filePath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/Dokumenter/Exports/pig_feeding_data.xlsx";
         boolean sucess = csvExportService.exportToExcel(pigs, feedingRecords, filePath);
 
         if (sucess) {
@@ -193,6 +211,76 @@ public class MainDashboardController implements IController {
                 );
     }
 
-    public TableView WarningListController;
+    private void populateLineChart() {
+        FeedingDataService service = new FeedingDataService();
+        List<FeedingRecord> records = service.getFeedingRecords();
+
+        if (records != null && !records.isEmpty()) {
+            Map<String, Double> feedTrend = records.stream()
+                    .collect(Collectors.groupingBy(
+                            record -> record.getTimestamp().toLocalDate().toString(),
+                            TreeMap::new,
+                            Collectors.summingDouble(FeedingRecord::getAmountInGrams)
+                    ));
+
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            feedTrend.forEach((date, totalFeed) -> {
+                if (totalFeed > 0) {
+                    series.getData().add(new XYChart.Data<>(date, totalFeed));
+                }
+            });
+
+            lineChart.getData().clear();
+            lineChart.getData().add(series);
+
+            // Adjust the Y-axis to avoid forcing zero
+            NumberAxis yAxis = (NumberAxis) lineChart.getYAxis();
+            yAxis.setForceZeroInRange(false);
+        } else {
+            System.err.println("No feeding records found.");
+        }
+    }
+
+    private void populatePieChart() {
+        FeedingDataService service = new FeedingDataService();
+        List<FeedingRecord> records = service.getFeedingRecords();
+
+        if (records != null && !records.isEmpty()) {
+            Map<String, Double> feedDistribution = records.stream()
+                .collect(Collectors.groupingBy(
+                    FeedingRecord::getLocation,
+                    Collectors.summingDouble(FeedingRecord::getAmountInGrams)
+                ));
+
+            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+            feedDistribution.forEach((location, totalFeed) -> pieChartData.add(new PieChart.Data(location, totalFeed)));
+
+            pieChart.setData(pieChartData);
+        }
+    }
+
+    private void populateStackedBarChart() {
+        FeedingDataService service = new FeedingDataService();
+        List<FeedingRecord> records = service.getFeedingRecords();
+
+        if (records != null && !records.isEmpty()) {
+            Map<String, Map<String, Double>> stackedData = records.stream()
+                .collect(Collectors.groupingBy(
+                    record -> record.getTimestamp().toLocalDate().toString(),
+                    Collectors.groupingBy(
+                        FeedingRecord::getLocation,
+                        Collectors.summingDouble(FeedingRecord::getAmountInGrams)
+                    )
+                ));
+
+            stackbarChart.getData().clear();
+            stackedData.forEach((date, locationData) -> {
+                XYChart.Series<String, Number> series = new XYChart.Series<>();
+                series.setName(date);
+                locationData.forEach((location, totalFeed) -> series.getData().add(new XYChart.Data<>(location, totalFeed)));
+                stackbarChart.getData().add(series);
+            });
+        }
+    }
 
 }

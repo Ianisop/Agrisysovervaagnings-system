@@ -110,6 +110,9 @@ public class MainDashboardController implements IController {
             adminTab.getContent().setStyle("-fx-background-color: grey;");
         }
 
+        pieChart.setLegendVisible(false);
+        lineChart.setLegendVisible(false);
+
         populateLineChart();
         populatePieChart();
         populateStackedBarChart();
@@ -282,5 +285,6 @@ public class MainDashboardController implements IController {
             });
         }
     }
+
 
 }

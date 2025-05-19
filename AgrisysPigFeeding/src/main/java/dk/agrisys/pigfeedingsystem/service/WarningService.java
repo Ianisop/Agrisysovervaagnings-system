@@ -23,24 +23,20 @@ public class WarningService {
         this.feedingRecordDAO = new FeedingRecordDAO();
     }
 
+
     public List<Pig> checkWarnings() {
         System.out.println("Service: Tjekker for advarsler...");
-        List<Pig> pigsWithWarnings = new ArrayList<>();
-        List<Pig> allPigs = pigDAO.getAllPigs();
+        List<Pig> pigs = pigDAO.getAllPigs();
         LocalDateTime threeDaysAgo = LocalDateTime.now().minusDays(3);
+        Map<String,Double> feedings = feedingRecordDAO.getRecentFeedingsByDate(threeDaysAgo);
 
-        for (Pig pig : allPigs) {
-            List<FeedingRecord> recentFeedings = feedingRecordDAO.getRecentFeedingsForPig(pig.getTagNumber(), threeDaysAgo);
-            double totalAmount = recentFeedings.stream()
-                    .mapToDouble(FeedingRecord::getAmountInGrams)
-                    .sum();
+        pigs.removeIf(pig ->{
+            double totalAmount = feedings.getOrDefault(pig.getTagNumber(),0.0); // 0 default
+            return totalAmount < MINIMUM_KG_PER_3_DAYS;
+        });
 
-            if (totalAmount < MINIMUM_KG_PER_3_DAYS) {
-                System.out.println("ADVARSEL: Gris " + pig.getTagNumber() + " har kun spist " + String.format("%.2f", totalAmount) + " kg de sidste 3 dage.");
-                pigsWithWarnings.add(pig);
-            }
-        }
-        System.out.println("Service: Advarselstjek færdig. Fundet " + pigsWithWarnings.size() + " grise.");
-        return pigsWithWarnings;
+
+        System.out.println("Service: Advarselstjek færdig. Fundet " + pigs.size() + " grise.");
+        return pigs;
     }
 }

@@ -6,13 +6,39 @@ import dk.agrisys.pigfeedingsystem.service.FeedingDataService;
 
 import java.sql.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class FeedingRecordDAO {
 
     private PigDAO pigData = new PigDAO();
+
+
+
+    public Map<String,Double> getRecentFeedingsByDate(LocalDateTime since){
+
+        Map<String,Double> feedingData = new HashMap<>();
+        String query = "SELECT FeedingID, FeedingLocation, PigID, [Date], Duration, FeedAmountGrams " +
+                "FROM Feeding " +
+                "WHERE (? IS NULL OR [Date] >= ?)";
+
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            ps.setObject(1, since);
+            ps.setObject(2, since);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    feedingData.put(String.valueOf(rs.getLong("PigID")),rs.getDouble("FeedAmmountGrams")); // cache each record by pig
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("Error fetching feeding records: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return feedingData;
+    }
 
 
     public List<FeedingRecord> getRecentFeedingsForPig(String pigId, LocalDateTime since) {

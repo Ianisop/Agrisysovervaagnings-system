@@ -16,6 +16,7 @@ public class PigDAO {
 
 
     public List<Pig> getAllPigs() {
+        long startTime = System.currentTimeMillis();
         List<Pig> pigs = new ArrayList<>();
         String query = "SELECT PigID, Number, Location, FCR, StartWeight, EndWeight, WeightGain, FeedIntake, TestDays, Duration FROM Pig";
 
@@ -41,6 +42,8 @@ public class PigDAO {
             System.err.println("DAO: Error fetching pigs from the database: " + e.getMessage());
             e.printStackTrace();
         }
+        long endTime = System.currentTimeMillis();
+        //System.out.println("Pig fetching took: " + String.valueOf((endTime-startTime)));
         return pigs;
     }
 

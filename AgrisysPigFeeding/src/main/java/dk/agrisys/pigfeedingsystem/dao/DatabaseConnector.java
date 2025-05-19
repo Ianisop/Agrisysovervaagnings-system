@@ -10,14 +10,14 @@ public class DatabaseConnector {
     // --- Database forbindelsesoplysninger (SQL SERVER EKSEMPEL) ---
     // SKAL hentes fra en sikker konfiguration!
     private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=Agrisys;encrypt=true;trustServerCertificate=true;"; // Erstat servernavn!
-    private static final String DB_USER = "Magnus"; // Erstat!
-    private static final String DB_PASSWORD = "Jpc77rfc"; // Erstat!
+    private static final String DB_USER = "admin"; // Erstat!
+    private static final String DB_PASSWORD = "1234"; // Erstat!
 
 
 
     // Placeholder - returnerer null indtil videre for at undgå fejl under kørsel uden DB
     public static Connection getConnection() throws SQLException {
-        System.out.println("Forsøger at forbinde til databasen (PLACEHOLDER - returnerer null)");
+       // System.out.println("Forsøger at forbinde til databasen (PLACEHOLDER - returnerer null)");
         // Udkommenter linjen nedenfor NÅR du har konfigureret din MSSQL database
 
         return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD); // <-- FJERN DENNE LINJE og udkommenter ovenstående NÅR DB er klar

@@ -8,13 +8,19 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-// (Hvem har skrevet: [Dit Navn/Gruppens Navn])
+/**
+ * DAO class for handling pig data.
+ * Contains methods to retrieve, save, and update pig data in the database.
+ */
 public class PigDAO {
 
-    private static final List<Pig> pigs = new ArrayList<>();
-    private static int nextId = 1;
+    private static final List<Pig> pigs = new ArrayList<>(); // List to hold pigs in memory
+    private static int nextId = 1; // Next ID for pigs (used only if no database is available)
 
-
+    /**
+     * Retrieves all pigs from the database.
+     * @return A list of pigs.
+     */
     public List<Pig> getAllPigs() {
         long startTime = System.currentTimeMillis();
         List<Pig> pigs = new ArrayList<>();
@@ -39,44 +45,50 @@ public class PigDAO {
             }
             System.out.println("DAO: Retrieved " + pigs.size() + " pigs from the database.");
         } catch (SQLException e) {
-            System.err.println("DAO: Error fetching pigs from the database: " + e.getMessage());
+            System.err.println("DAO: Error retrieving pigs from the database: " + e.getMessage());
             e.printStackTrace();
         }
         long endTime = System.currentTimeMillis();
-        //System.out.println("Pig fetching took: " + String.valueOf((endTime-startTime)));
         return pigs;
     }
 
-    // Check if a pig is valid from db
-    public boolean getPig(Long pigId)
-    {
+    /**
+     * Checks if a pig with a specific ID exists in the database.
+     * @param pigId The ID of the pig.
+     * @return True if the pig exists, otherwise false.
+     */
+    public boolean getPig(Long pigId) {
         String query = "SELECT 1 FROM Pig WHERE PigID = ?";
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setLong(1, pigId);
             ResultSet rs = ps.executeQuery();
-            return rs.next(); // if any row exists, pig exists
+            return rs.next(); // If a row exists, the pig exists
 
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
+
+    /**
+     * Saves a list of pigs to the database in batches.
+     * @param pigs The list of pigs to save.
+     * @return True if the insertion was successful, otherwise false.
+     */
     public boolean batchSavePigs(List<Pig> pigs) {
         if (pigs == null || pigs.isEmpty()) return true;
 
         String sql = "INSERT INTO Pig (PigID, Number, Location, FCR, StartWeight, EndWeight, WeightGain, FeedIntake, TestDays, Duration) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        // Fetch all existing PigIDs from DB
-        Set<Long> existingPigs = getAllPigIds();
+        Set<Long> existingPigs = getAllPigIds(); // Retrieve existing pig IDs from the database
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             conn.setAutoCommit(false);
 
-            //save just their ids for now using an extra check
             for (Pig pig : pigs) {
                 long pigId = Long.parseLong(pig.getTagNumber());
 
@@ -92,22 +104,25 @@ public class PigDAO {
                     ps.setInt(9, pig.getTestDays());
                     ps.setFloat(10, pig.getDuration());
                     ps.addBatch();
-                    existingPigs.add(pigId);// cache the pig : solves everything
-                   // System.out.println(pigId);
+                    existingPigs.add(pigId); // Add the pig to the cache
                 }
             }
 
             ps.executeBatch();
             conn.commit();
-            System.out.println("PigDAO: Batch pig insert completed. New pigs: " + pigs.size());
+            System.out.println("PigDAO: Batch insertion of pigs completed. New pigs: " + pigs.size());
             return true;
 
         } catch (SQLException e) {
-            System.err.println("PigDAO: Error in batch pig insert: " + e.getMessage());
+            System.err.println("PigDAO: Error during batch insertion of pigs: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Retrieves all pig IDs from the database.
+     * @return A set of pig IDs.
+     */
     public Set<Long> getAllPigIds() {
         Set<Long> pigIds = new HashSet<>();
         String sql = "SELECT PigID FROM Pig";
@@ -123,10 +138,15 @@ public class PigDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("PIGDAO: Fetched " + String.valueOf(pigIds.stream().count()) + "pigIds from DB");
+        System.out.println("PigDAO: Retrieved " + pigIds.size() + " pig IDs from the database.");
         return pigIds;
     }
 
+    /**
+     * Saves a single pig to the database.
+     * @param pig The pig to save.
+     * @return True if the insertion was successful, otherwise false.
+     */
     public boolean savePig(Pig pig) {
         String query = "INSERT INTO Pig(PigID, Number, Location, FCR, StartWeight, EndWeight, WeightGain, FeedIntake, TestDays, Duration) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -144,23 +164,25 @@ public class PigDAO {
             conn.setAutoCommit(false);
             try (PreparedStatement ps = conn.prepareStatement(query)) {
                 ps.setLong(1, Long.parseLong(pig.getTagNumber()));
+                ps.setInt(2, pig.getNumber());
+                ps.setInt(3, pig.getLocation());
+                ps.setFloat(4, pig.getFCR());
+                ps.setFloat(5, pig.getStartWeight());
+                ps.setFloat(6, pig.getEndWeight());
+                ps.setFloat(7, pig.getWeightGain());
+                ps.setFloat(8, pig.getFeedIntake());
+                ps.setInt(9, pig.getTestDays());
+                ps.setFloat(10, pig.getDuration());
                 int rowsInserted = ps.executeUpdate();
                 conn.commit();
-                if (rowsInserted > 0) {
-                    //System.out.println("DAO: Saved pig " + pig.getTagNumber());
-                    return true;
-                } else {
-                    System.out.println("DAO: Pig insert returned 0 rows.");
-                    return false;
-                }
+                return rowsInserted > 0;
+
             }
 
         } catch (SQLException e) {
-            System.out.println("DAO: Error saving pig " + pig.getTagNumber());
+            System.out.println("DAO: Error inserting pig " + pig.getTagNumber());
             e.printStackTrace();
             return false;
         }
     }
-
-
 }

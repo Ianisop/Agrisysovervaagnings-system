@@ -9,16 +9,28 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Service class for managing feeding data.
+ * Provides methods to retrieve feeding records and pig data from the database.
+ */
 public class FeedingDataService {
 
-    private final PigDAO pigDAO;
-    private final FeedingRecordDAO feedingRecordDAO;
+    private final PigDAO pigDAO; // DAO for accessing pig data
+    private final FeedingRecordDAO feedingRecordDAO; // DAO for accessing feeding record data
 
+    /**
+     * Constructor for FeedingDataService.
+     * Initializes the DAOs for pig and feeding record data.
+     */
     public FeedingDataService() {
         this.pigDAO = new PigDAO();
         this.feedingRecordDAO = new FeedingRecordDAO();
     }
 
+    /**
+     * Retrieves all feeding records from the database.
+     * @return A list of FeedingRecord objects, or an empty list if an error occurs.
+     */
     public List<FeedingRecord> getFeedingRecords() {
         try {
             List<FeedingRecord> feedingRecords = feedingRecordDAO.getRecentFeedingsForPig(null, null);
@@ -31,6 +43,10 @@ public class FeedingDataService {
         }
     }
 
+    /**
+     * Retrieves all pigs from the database.
+     * @return A list of Pig objects, or an empty list if an error occurs.
+     */
     public List<Pig> getAllPigs() {
         try {
             List<Pig> pigs = pigDAO.getAllPigs();
@@ -43,6 +59,12 @@ public class FeedingDataService {
         }
     }
 
+    /**
+     * Retrieves feeding records for a specific pig since a given time.
+     * @param pigId The ID of the pig to retrieve feeding records for.
+     * @param since The starting time to filter feeding records.
+     * @return A list of FeedingRecord objects, or an empty list if an error occurs.
+     */
     public List<FeedingRecord> getAllFeedingRecords(String pigId, LocalDateTime since) {
         try {
             List<FeedingRecord> feedingRecords = feedingRecordDAO.getRecentFeedingsForPig(pigId, since);

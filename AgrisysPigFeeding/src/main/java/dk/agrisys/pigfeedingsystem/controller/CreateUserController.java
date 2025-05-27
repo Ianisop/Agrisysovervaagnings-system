@@ -8,66 +8,67 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
- * Controller for creating new users (SUPERUSER by default).
+ * Controller for creating new users (default role: SUPERUSER).
  */
 public class CreateUserController {
 
     @FXML
-    private TextField usernameField;
+    private TextField usernameField; // Field for entering the username
 
     @FXML
-    private TextField passwordField;
+    private TextField passwordField; // Field for entering the password
 
     @FXML
-    private TextField inviteCodeField;
+    private TextField inviteCodeField; // Field for entering the invite code
 
     @FXML
-    private Label statusLabel;
+    private Label statusLabel; // Label for displaying status messages
 
-    private final UserService userService;
+    private final UserService userService; // Service for managing user operations
 
     /**
-     * Constructor initializes the UserService.
+     * Constructor that initializes the UserService.
      */
     public CreateUserController() {
         this.userService = new UserService();
     }
 
     /**
-     * Handles the Create User button click.
+     * Handles the "Create User" button click.
      * Validates input and attempts to create a SUPERUSER.
      */
-   @FXML
+    @FXML
     private void handleCreateUserAction() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-        String inviteCode = inviteCodeField.getText();
+        String username = usernameField.getText(); // Retrieve the username from the field
+        String password = passwordField.getText(); // Retrieve the password from the field
+        String inviteCode = inviteCodeField.getText(); // Retrieve the invite code from the field
 
-        // Input validation
+        // Validate input
         if (isEmpty(username) || isEmpty(password)) {
-            showStatus("All fields are required.", "red");
+            showStatus("All fields must be filled.", "red");
             return;
         }
 
         try {
-            boolean success = userService.createUser(username, password, inviteCode); // Create regular USER
+            // Attempt to create a new user
+            boolean success = userService.createUser(username, password, inviteCode);
             if (success) {
                 showStatus("User created successfully!", "green");
-                clearFields();
-                App.loadScene("view/LoginView.fxml");
+                clearFields(); // Clear the input fields
+                App.loadScene("view/LoginView.fxml"); // Switch to the login view
             } else {
-                showStatus("Failed to create user (already exists?).", "red");
+                showStatus("Could not create user (already exists?).", "red");
             }
         } catch (Exception e) {
             showStatus("Error: " + e.getMessage(), "red");
-            e.printStackTrace(); // For debugging
+            e.printStackTrace(); // Print the error for debugging
         }
     }
 
     /**
-     * Checks if a string is null or empty.
-     * @param input the string to check
-     * @return true if null or empty
+     * Checks if a string is empty or null.
+     * @param input The string to check
+     * @return true if the string is empty or null
      */
     private boolean isEmpty(String input) {
         return input == null || input.trim().isEmpty();
@@ -82,12 +83,12 @@ public class CreateUserController {
     }
 
     /**
-     * Displays status message to the user.
-     * @param message The message text
-     * @param color "red" or "green"
+     * Displays a status message to the user.
+     * @param message The text of the message
+     * @param color "red" or "green" for the message color
      */
     private void showStatus(String message, String color) {
-        statusLabel.setText(message);
-        statusLabel.setStyle("-fx-text-fill: " + color + ";");
+        statusLabel.setText(message); // Set the message text
+        statusLabel.setStyle("-fx-text-fill: " + color + ";"); // Set the text color
     }
 }

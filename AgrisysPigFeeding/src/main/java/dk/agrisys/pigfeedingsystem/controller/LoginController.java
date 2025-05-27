@@ -16,91 +16,98 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Controller for login view.
- * Håndterer bruger-login og visning af dashboard eller fejlmeddelelser.
+ * Controller for the login view.
+ * Handles user login and navigation to the dashboard or displays error messages.
  */
 public class LoginController {
 
     @FXML
-    private TextField usernameField;
+    private TextField usernameField; // Field for entering the username
 
     @FXML
-    private PasswordField passwordField;
+    private PasswordField passwordField; // Field for entering the password
 
     @FXML
-    private Label errorLabel;
+    private Label errorLabel; // Label for displaying error messages
 
-    private final AuthenticationService authService;
+    private final AuthenticationService authService; // Service for handling authentication
 
     /**
-     * Constructor som initialiserer AuthenticationService.
+     * Constructor that initializes the AuthenticationService.
      */
     public LoginController() {
         this.authService = new AuthenticationService();
     }
 
     /**
-     * Initialiseringsmetode til at nulstille fejltekst.
+     * Initialization method that resets the error message.
      */
     @FXML
     private void initialize() {
-        errorLabel.setText("");
+        errorLabel.setText(""); // Reset the error message
     }
 
     /**
-     * Håndterer login-knap. Validerer bruger og skifter til dashboard ved succes.
+     * Handles the login button action.
+     * Validates user credentials and navigates to the dashboard on success.
      */
     @FXML
     private void handleLoginButtonAction() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        String username = usernameField.getText(); // Retrieve the username from the field
+        String password = passwordField.getText(); // Retrieve the password from the field
 
+        // Check if the fields are empty
         if (isEmpty(username) || isEmpty(password)) {
-            errorLabel.setText("Begge felter skal udfyldes.");
+            errorLabel.setText("Both fields must be filled."); // Display error message
             return;
         }
 
+        // Attempt to authenticate the user
         User authenticatedUser = authService.authenticate(username, password);
 
         if (authenticatedUser != null) {
-            errorLabel.setText("");
-            System.out.println("Login succesfuld for: " + authenticatedUser.getUsername()
-                    + " | Rolle: " + authenticatedUser.getRole());
+            // Login was successful
+            errorLabel.setText(""); // Reset the error message
+            System.out.println("Login successful for: " + authenticatedUser.getUsername()
+                    + " | Role: " + authenticatedUser.getRole());
 
             try {
-                // Gem bruger globalt hvis nødvendigt: App.setCurrentUser(authenticatedUser);
+                // Save the authenticated user in the session
                 SessionContext.setCurrentUser(authenticatedUser);
+                // Switch to the dashboard view
                 App.loadScene("view/MainDashboardView.fxml");
             } catch (IOException e) {
                 e.printStackTrace();
-                errorLabel.setText("Fejl: Kunne ikke loade dashboard.");
+                errorLabel.setText("Error: Could not load the dashboard."); // Display error message
             }
         } else {
-            errorLabel.setText("Ugyldigt brugernavn eller password.");
+            // Login failed
+            errorLabel.setText("Invalid username or password."); // Display error message
         }
     }
 
     /**
-     * Håndterer "Create User"-knap og åbner view til oprettelse.
+     * Handles the "Create User" button action and opens the user creation view.
      */
     @FXML
     private void handleCreateUserButtonAction() {
         try {
+            // Load CreateUserView.fxml and switch the scene
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/CreateUserView.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.setTitle("Opret Bruger");
+            stage.setTitle("Create User");
         } catch (IOException e) {
             e.printStackTrace();
-            errorLabel.setText("Fejl: Kunne ikke loade Opret Bruger-view.");
+            errorLabel.setText("Error: Could not load the Create User view."); // Display error message
         }
     }
 
     /**
-     * Hjælpefunktion til at kontrollere tomme felter.
-     * @param value Tekstfeltets værdi
-     * @return true hvis tom eller null
+     * Helper function to check if a text field is empty.
+     * @param value The value of the text field
+     * @return true if the field is empty or null
      */
     private boolean isEmpty(String value) {
         return value == null || value.trim().isEmpty();

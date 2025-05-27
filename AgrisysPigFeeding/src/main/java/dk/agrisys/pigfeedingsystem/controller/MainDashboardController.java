@@ -14,95 +14,99 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TableView;
 import javafx.scene.text.TextFlow;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
+/**
+ * Controller for the main dashboard, handling data display, charts, and user actions.
+ */
 public class MainDashboardController implements IController {
 
     @FXML
-    private Tab adminTab;
+    private Tab adminTab; // Tab for administrator functions
 
     @FXML
-    private Tab dataTab;
+    private Tab dataTab; // Tab for data display
 
     @FXML
-    private Tab warningTab;
+    private Tab warningTab; // Tab for warnings
 
     @FXML
-    private TextFlow dataTextLog;
+    private TextFlow dataTextLog; // Log for displaying data
 
     @FXML
-    private Button exportCSV;
+    private Button exportCSV; // Button for exporting data as CSV
 
     @FXML
-    private Button exportXLSX;
+    private Button exportXLSX; // Button for exporting data as Excel
 
     @FXML
-    private Text inviteCodeTextDisplay;
+    private Text inviteCodeTextDisplay; // Text field for displaying the invite code
 
     @FXML
-    private Button generateAdminInvite;
+    private Button generateAdminInvite; // Button for generating admin invite code
 
     @FXML
-    private Button generateInvite;
+    private Button generateInvite; // Button for generating user invite code
 
     @FXML
-    private Button importCSV;
+    private Button importCSV; // Button for importing CSV data
 
     @FXML
-    private Button importXLSX;
+    private Button importXLSX; // Button for importing Excel data
 
     @FXML
-    private Button copyCodeToClipboard;
+    private Button copyCodeToClipboard; // Button for copying the invite code to clipboard
 
     @FXML
-    private PieChart pieChart;
+    private PieChart pieChart; // Pie chart for data visualization
 
     @FXML
-    private LineChart<String, Number> lineChart;
+    private LineChart<String, Number> lineChart; // Line chart for data visualization
 
     @FXML
-    private StackedBarChart<String, Number> stackbarChart;
+    private StackedBarChart<String, Number> stackbarChart; // Stacked bar chart for data visualization
 
-    @FXML private Tab kpiTab;
+    @FXML
+    private Tab kpiTab; // Tab for KPI display
 
-    private Stage primaryStage;
+    private Stage primaryStage; // Main application window
 
+    /**
+     * Sets the primary stage.
+     * @param stage The main application window
+     */
     public void setPrimaryStage(Stage stage) {
         this.primaryStage = stage;
     }
 
+    /**
+     * Initializes the dashboard and configures tabs and charts.
+     */
     @FXML
     private void initialize() {
-        User user = SessionContext.getCurrentUser();
+        User user = SessionContext.getCurrentUser(); // Retrieve the current user
         if (user == null) return;
 
-        UserRole userRole = user.getRole();
+        UserRole userRole = user.getRole(); // Retrieve the user's role
         if (userRole == null) return;
 
+        // Enable or disable the admin tab based on the user's role
         if (userRole == UserRole.SUPERUSER) {
             adminTab.setDisable(false);
         } else {
@@ -110,14 +114,20 @@ public class MainDashboardController implements IController {
             adminTab.getContent().setStyle("-fx-background-color: grey;");
         }
 
+        // Hide legends on charts
         pieChart.setLegendVisible(false);
         lineChart.setLegendVisible(false);
 
+        // Populate charts with data
         populateLineChart();
         populatePieChart();
         populateStackedBarChart();
     }
 
+    /**
+     * Imports data from an Excel file.
+     * @param e ActionEvent from the button
+     */
     public void importXLSX(ActionEvent e) {
         FileChooser fileChooser = new FileChooser();
         ExcelImportService eis = new ExcelImportService();
@@ -126,6 +136,10 @@ public class MainDashboardController implements IController {
         if (selectedFile != null) eis.importFromExcel(selectedFile);
     }
 
+    /**
+     * Generates a user invite code and saves it to the database.
+     * @param e ActionEvent from the button
+     */
     public void generateUserInvite(ActionEvent e) {
         String code = dk.agrisys.pigfeedingsystem.Generator.generate(16);
         InviteCodeDAO inviteCodeDAO = new InviteCodeDAO();
@@ -137,6 +151,10 @@ public class MainDashboardController implements IController {
         inviteCodeTextDisplay.setText(code);
     }
 
+    /**
+     * Generates an admin invite code and saves it to the database.
+     * @param e ActionEvent from the button
+     */
     public void generateAdminInvite(ActionEvent e) {
         String code = dk.agrisys.pigfeedingsystem.Generator.generate(16);
         InviteCodeDAO inviteCodeDAO = new InviteCodeDAO();
@@ -148,19 +166,23 @@ public class MainDashboardController implements IController {
         inviteCodeTextDisplay.setText(code);
     }
 
+    /**
+     * Exports data to a CSV file.
+     * @param event ActionEvent from the button
+     */
     public void handleExportButtonClick(ActionEvent event) {
         CsvExportService csvExportService = new CsvExportService();
 
-        // Fetch data from dbo.pig and dbo.feeding
+        // Retrieve data from the database
         List<Pig> pigs = fetchPigs();
         List<FeedingRecord> feedingRecords = fetchFeedingRecords();
 
-        // Predefined file path - ændret til .csv extension
-        String filePath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/Exports/pig_feeding_data.csv";
+        // Predefined file path
+        String filePath = System.getProperty("user.home") + "/Exports/pig_feeding_data.csv";
 
         File file = new File(filePath);
         if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
-            System.err.println("Error: Failed to create export directory.");
+            System.err.println("Error: Could not create export directory.");
             return;
         }
 
@@ -170,42 +192,13 @@ public class MainDashboardController implements IController {
         } else {
             System.err.println("Export failed.");
         }
-
     }
 
-
-    private List<Pig> fetchPigs() {
-        FeedingDataService service = new FeedingDataService();
-        return service.getAllPigs();
-    }
-
-    private List<FeedingRecord> fetchFeedingRecords() {
-        FeedingDataService service = new FeedingDataService();
-        return service.getAllFeedingRecords(null, LocalDateTime.of(1,1,1,0,0)); // Default values
-    }
-    public void handleExportButtonClick() {
-        CsvExportService csvExportService = new CsvExportService();
-
-        // Fetch data from dbo.pig and dbo.feeding
-        List<Pig> pigs = fetchPigs();
-        List<FeedingRecord> feedingRecords = fetchFeedingRecords();
-
-        if (pigs.isEmpty() && feedingRecords.isEmpty()) {
-            System.err.println("No data to export.");
-            return;
-        }
-        String filePath = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/Dokumenter/Exports/pig_feeding_data.xlsx";
-        boolean sucess = csvExportService.exportToExcel(pigs, feedingRecords, filePath);
-
-        if (sucess) {
-            System.out.println("Export successful: " + filePath);
-        } else {
-            System.err.println("Export failed.");
-        }
-
-    }
-
-    public void copyCodeToClipboard(ActionEvent e){
+    /**
+     * Copies the invite code to the clipboard.
+     * @param e ActionEvent from the button
+     */
+    public void copyCodeToClipboard(ActionEvent e) {
         Toolkit.getDefaultToolkit()
                 .getSystemClipboard()
                 .setContents(
@@ -214,6 +207,9 @@ public class MainDashboardController implements IController {
                 );
     }
 
+    /**
+     * Populates the line chart with data.
+     */
     private void populateLineChart() {
         FeedingDataService service = new FeedingDataService();
         List<FeedingRecord> records = service.getFeedingRecords();
@@ -236,24 +232,27 @@ public class MainDashboardController implements IController {
             lineChart.getData().clear();
             lineChart.getData().add(series);
 
-            // Adjust the Y-axis to avoid forcing zero
+            // Adjust Y-axis to avoid forced zero point
             NumberAxis yAxis = (NumberAxis) lineChart.getYAxis();
             yAxis.setForceZeroInRange(false);
         } else {
-            System.err.println("No feeding records found.");
+            System.err.println("No feeding data found.");
         }
     }
 
+    /**
+     * Populates the pie chart with data.
+     */
     private void populatePieChart() {
         FeedingDataService service = new FeedingDataService();
         List<FeedingRecord> records = service.getFeedingRecords();
 
         if (records != null && !records.isEmpty()) {
             Map<String, Double> feedDistribution = records.stream()
-                .collect(Collectors.groupingBy(
-                    FeedingRecord::getLocation,
-                    Collectors.summingDouble(FeedingRecord::getAmountInGrams)
-                ));
+                    .collect(Collectors.groupingBy(
+                            FeedingRecord::getLocation,
+                            Collectors.summingDouble(FeedingRecord::getAmountInGrams)
+                    ));
 
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
             feedDistribution.forEach((location, totalFeed) -> pieChartData.add(new PieChart.Data(location, totalFeed)));
@@ -262,19 +261,22 @@ public class MainDashboardController implements IController {
         }
     }
 
+    /**
+     * Populates the stacked bar chart with data.
+     */
     private void populateStackedBarChart() {
         FeedingDataService service = new FeedingDataService();
         List<FeedingRecord> records = service.getFeedingRecords();
 
         if (records != null && !records.isEmpty()) {
             Map<String, Map<String, Double>> stackedData = records.stream()
-                .collect(Collectors.groupingBy(
-                    record -> record.getTimestamp().toLocalDate().toString(),
-                    Collectors.groupingBy(
-                        FeedingRecord::getLocation,
-                        Collectors.summingDouble(FeedingRecord::getAmountInGrams)
-                    )
-                ));
+                    .collect(Collectors.groupingBy(
+                            record -> record.getTimestamp().toLocalDate().toString(),
+                            Collectors.groupingBy(
+                                    FeedingRecord::getLocation,
+                                    Collectors.summingDouble(FeedingRecord::getAmountInGrams)
+                            )
+                    ));
 
             stackbarChart.getData().clear();
             stackedData.forEach((date, locationData) -> {
@@ -286,5 +288,21 @@ public class MainDashboardController implements IController {
         }
     }
 
+    /**
+     * Retrieves all pigs from the database.
+     * @return List of pigs
+     */
+    private List<Pig> fetchPigs() {
+        FeedingDataService service = new FeedingDataService();
+        return service.getAllPigs();
+    }
 
+    /**
+     * Retrieves all feeding data from the database.
+     * @return List of feeding data
+     */
+    private List<FeedingRecord> fetchFeedingRecords() {
+        FeedingDataService service = new FeedingDataService();
+        return service.getAllFeedingRecords(null, LocalDateTime.of(1, 1, 1, 0, 0)); // Default values
+    }
 }

@@ -9,9 +9,9 @@
         <columns>
             <TableColumn fx:id="pigIdColumn" text="Pig ID" prefWidth="200" />
             <TableColumn fx:id="warningTypeColumn" text="Advarsel" prefWidth="150" />
-            <TableColumn fx:id="BeskedColumn" text="Besked" prefWidth="250" />
-            <TableColumn fx:id="OprettedColumn" text="Opretted" prefWidth="150" />
-            <TableColumn fx:id="LøstColumn" text="Løst" prefWidth="100" />
+            <TableColumn fx:id="messageColumn" text="Besked" prefWidth="250" />
+            <TableColumn fx:id="createdDateColumn" text="Opretted" prefWidth="150" />
+            <TableColumn fx:id="resolvedColumn" text="Løst" prefWidth="100" />
         </columns>
     </TableView>
 </VBox>

@@ -13,8 +13,8 @@ public class DatabaseConnector {
     // --- Database connection details (SQL SERVER EXAMPLE) ---
     // These details should be retrieved from a secure configuration to protect sensitive data.
     private static final String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=Agrisys;encrypt=true;trustServerCertificate=true;"; // Database URL
-    private static final String DB_USER = "admin"; // Database username
-    private static final String DB_PASSWORD = "1234"; // Database password
+    private static final String DB_USER = "Magnus"; // Database username
+    private static final String DB_PASSWORD = "Jpc77rfc"; // Database password
 
     /**
      * Establishes a connection to the database.

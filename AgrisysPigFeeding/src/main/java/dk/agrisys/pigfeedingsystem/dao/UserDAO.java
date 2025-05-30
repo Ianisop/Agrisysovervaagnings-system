@@ -1,6 +1,5 @@
 package dk.agrisys.pigfeedingsystem.dao;
 
-import dk.agrisys.pigfeedingsystem.Generator;
 import dk.agrisys.pigfeedingsystem.model.User;
 import dk.agrisys.pigfeedingsystem.model.UserRole;
 
@@ -9,9 +8,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.mindrot.jbcrypt.BCrypt;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * DAO class for handling user data.

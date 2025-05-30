@@ -1,7 +1,5 @@
 package dk.agrisys.pigfeedingsystem.model;
 
-import dk.agrisys.pigfeedingsystem.Generator;
-
 /**
  * Model class representing a user.
  * Contains information about the username, password, role, and the user's unique ID.

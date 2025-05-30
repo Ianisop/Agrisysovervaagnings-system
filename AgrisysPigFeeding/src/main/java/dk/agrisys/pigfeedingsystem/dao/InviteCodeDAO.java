@@ -1,6 +1,6 @@
 package dk.agrisys.pigfeedingsystem.dao;
 
-import dk.agrisys.pigfeedingsystem.SessionContext;
+import dk.util.SessionContext;
 import dk.agrisys.pigfeedingsystem.model.User;
 import dk.agrisys.pigfeedingsystem.service.UserService;
 

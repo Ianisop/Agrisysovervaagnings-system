@@ -1,7 +1,7 @@
 package dk.agrisys.pigfeedingsystem.controller;
 
 import dk.App;
-import dk.agrisys.pigfeedingsystem.SessionContext;
+import dk.util.SessionContext;
 import dk.agrisys.pigfeedingsystem.model.User;
 import dk.agrisys.pigfeedingsystem.service.AuthenticationService;
 import javafx.fxml.FXML;

@@ -1,9 +1,8 @@
 package dk.agrisys.pigfeedingsystem.service;
 
-import dk.agrisys.pigfeedingsystem.Generator;
+import dk.util.Generator;
 import dk.agrisys.pigfeedingsystem.dao.InviteCodeDAO;
 import dk.agrisys.pigfeedingsystem.dao.UserDAO;
-import dk.agrisys.pigfeedingsystem.model.User;
 import dk.agrisys.pigfeedingsystem.model.UserRole;
 
 /**

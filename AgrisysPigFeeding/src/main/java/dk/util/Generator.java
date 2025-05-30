@@ -1,7 +1,6 @@
-package dk.agrisys.pigfeedingsystem;
+package dk.util;
 
 import java.security.SecureRandom;
-import java.util.UUID;
 
 public class Generator {
     private static final SecureRandom random = new SecureRandom();

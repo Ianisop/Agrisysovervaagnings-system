@@ -1,6 +1,6 @@
 package dk.agrisys.pigfeedingsystem.controller;
 
-import dk.agrisys.pigfeedingsystem.SessionContext;
+import dk.util.SessionContext;
 import dk.agrisys.pigfeedingsystem.dao.InviteCodeDAO;
 import dk.agrisys.pigfeedingsystem.model.FeedingRecord;
 import dk.agrisys.pigfeedingsystem.model.Pig;
@@ -9,6 +9,7 @@ import dk.agrisys.pigfeedingsystem.model.UserRole;
 import dk.agrisys.pigfeedingsystem.service.CsvExportService;
 import dk.agrisys.pigfeedingsystem.service.ExcelImportService;
 import dk.agrisys.pigfeedingsystem.service.FeedingDataService;
+import dk.util.Generator;
 import dk.util.IController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -141,7 +142,7 @@ public class MainDashboardController implements IController {
      * @param e ActionEvent from the button
      */
     public void generateUserInvite(ActionEvent e) {
-        String code = dk.agrisys.pigfeedingsystem.Generator.generate(16);
+        String code = Generator.generate(16);
         InviteCodeDAO inviteCodeDAO = new InviteCodeDAO();
         try {
             inviteCodeDAO.saveCodeToDb(code, false);
@@ -156,7 +157,7 @@ public class MainDashboardController implements IController {
      * @param e ActionEvent from the button
      */
     public void generateAdminInvite(ActionEvent e) {
-        String code = dk.agrisys.pigfeedingsystem.Generator.generate(16);
+        String code = Generator.generate(16);
         InviteCodeDAO inviteCodeDAO = new InviteCodeDAO();
         try {
             inviteCodeDAO.saveCodeToDb(code, true);

@@ -1,4 +1,4 @@
-package dk.agrisys.pigfeedingsystem;
+package dk.util;
 
 import dk.agrisys.pigfeedingsystem.model.User;
 

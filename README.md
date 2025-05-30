@@ -21,7 +21,7 @@ Klone programmet
 git clone https://github.com/Ianisop/Agrisysovervaagnings-system
 ```
 > ⚠️ **Vigtigt**  
-> Opret din admin bruger og kør SQL filen i SQL Server Management Studio (windows)
+> Opret din admin bruger og kør SQL filen i SQL Server Management Studio før det næste trin (windows)
 
 
 Kør appen igennem Maven

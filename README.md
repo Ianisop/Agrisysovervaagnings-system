@@ -35,4 +35,4 @@ mvn javafx:run
 - JDBC driver til SQL
 - Maven
 - JavaFX
-- JDK 23
+- JDK 24
